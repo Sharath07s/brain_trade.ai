@@ -6,6 +6,15 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import { useGlobalContext } from '../context/GlobalContext';
 import { useParams } from 'react-router-dom';
 
+const formatLargeValue = (value: number, currency: string) => {
+    if (!value) return 'N/A';
+    const sym = currency === 'INR' ? '₹' : '$';
+    if (value >= 1e12) return sym + (value / 1e12).toFixed(2) + 'T';
+    if (value >= 1e9) return sym + (value / 1e9).toFixed(2) + 'B';
+    if (value >= 1e6) return sym + (value / 1e6).toFixed(2) + 'M';
+    return sym + value.toLocaleString();
+};
+
 const Dashboard = () => {
   const { symbol: routeSymbol } = useParams();
   const { symbol, setSymbol } = useGlobalContext();
@@ -85,7 +94,7 @@ const Dashboard = () => {
                 <h2 className="text-3xl font-bold text-white mb-2">{stock.name} <span className="text-neutral font-medium text-lg ml-2">({stock.symbol})</span></h2>
                 <div className="flex items-center gap-4">
                     <span className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-neutral">
-                    ${stock.current_price?.toFixed(2) || '0.00'}
+                    {stock.currency === 'INR' ? '₹' : '$'}{stock.current_price?.toFixed(2) || '0.00'}
                     </span>
                     {stock.open && (
                         <span className={`flex items-center text-sm font-semibold px-2 py-1 rounded-md ${stock.current_price >= stock.open ? 'bg-bullish/10 text-bullish' : 'bg-bearish/10 text-bearish'}`}>
@@ -122,7 +131,7 @@ const Dashboard = () => {
                             </defs>
                             <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" vertical={false} />
                             <XAxis dataKey="date" stroke="#8892b0" fontSize={12} tickMargin={10} axisLine={false} tickLine={false} />
-                            <YAxis domain={['auto', 'auto']} stroke="#8892b0" fontSize={12} tickFormatter={(val) => `$${val}`} axisLine={false} tickLine={false} />
+                            <YAxis domain={['auto', 'auto']} stroke="#8892b0" fontSize={12} tickFormatter={(val) => `${stock.currency === 'INR' ? '₹' : '$'}${val}`} axisLine={false} tickLine={false} />
                             <Tooltip 
                             contentStyle={{ backgroundColor: '#13141f', borderColor: '#ffffff20', borderRadius: '12px' }}
                             itemStyle={{ color: '#fff' }}
@@ -152,9 +161,37 @@ const Dashboard = () => {
                 </div>
             </div>
 
-            {/* Right Area: AI Explainability */}
+            {/* Right Area: Explainability & Overviews */}
             <div className="lg:col-span-1 space-y-6">
-                <div className="glass p-6 rounded-3xl relative overflow-hidden h-full flex flex-col">
+                
+                {/* Company Details */}
+                <div className="glass p-6 rounded-3xl group">
+                    <h3 className="font-semibold text-white mb-4">Company Overview</h3>
+                    <div className="space-y-3 text-sm">
+                        <div className="flex justify-between items-center pb-2 border-b border-white/5">
+                            <span className="text-neutral">Sector</span>
+                            <span className="text-white font-medium text-right max-w-[60%] truncate">{stock.sector || 'N/A'}</span>
+                        </div>
+                        <div className="flex justify-between items-center pb-2 border-b border-white/5">
+                            <span className="text-neutral">Mkt Cap</span>
+                            <span className="text-white font-medium">{formatLargeValue(stock.market_cap, stock.currency)}</span>
+                        </div>
+                        <div className="flex justify-between items-center pb-2 border-b border-white/5">
+                            <span className="text-neutral">P/E Ratio</span>
+                            <span className="text-white font-medium">{stock.pe_ratio ? stock.pe_ratio.toFixed(2) : 'N/A'}</span>
+                        </div>
+                        <div className="flex justify-between items-center pb-2 border-b border-white/5">
+                            <span className="text-neutral">52W High</span>
+                            <span className="text-white font-medium">{stock.currency === 'INR' ? '₹' : '$'}{stock['52_week_high']?.toFixed(2) || 'N/A'}</span>
+                        </div>
+                        <div className="flex justify-between items-center">
+                            <span className="text-neutral">52W Low</span>
+                            <span className="text-white font-medium">{stock.currency === 'INR' ? '₹' : '$'}{stock['52_week_low']?.toFixed(2) || 'N/A'}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="glass p-6 rounded-3xl relative overflow-hidden flex flex-col">
                     <div className="flex items-center gap-3 mb-6">
                     <div className="p-2 bg-accent/20 rounded-lg">
                         <Brain className="text-accent" size={24} />

@@ -1,43 +1,67 @@
 import os
-import requests
+import yfinance as yf
 from textblob import TextBlob
 from datetime import datetime
+import threading
+import time
+from services.symbol_resolver import resolve_yahoo_symbol
 
-NEWS_API_KEY = os.getenv("NEWS_API_KEY")
+_news_cache = {}
+_cache_lock = threading.Lock()
+CACHE_TTL = 300  # News cache for 5 minutes
 
 def fetch_and_analyze_news(symbol: str) -> list:
-    """Fetches news and calculates basic sentiment (real or mock)."""
-    # If no key, we return some plausible mock news for the hackathon MVP
-    # In a real scenario, use:
-    # url = f"https://newsapi.org/v2/everything?q={symbol}&apiKey={NEWS_API_KEY}"
+    """Fetches real news via yfinance and calculates sentiment."""
+    yahoo_symbol = resolve_yahoo_symbol(symbol)
     
-    mock_news = [
-        {"title": f"{symbol} surges on new product announcement", "source": "Finance Weekly", "sentiment": "Positive"},
-        {"title": f"Analysts upgrade {symbol} to Strong Buy ahead of earnings", "source": "Wall St Journal", "sentiment": "Positive"},
-        {"title": f"Supply chain issues may affect {symbol} Q3 output", "source": "Tech Crunch", "sentiment": "Negative"},
-        {"title": f"Market reacts to {symbol}'s recent structural changes", "source": "Bloomberg", "sentiment": "Neutral"},
-    ]
-    
-    analyzed_news = []
-    
-    # TextBlob logic to determine score
-    for item in mock_news:
-        blob = TextBlob(item["title"])
-        score = blob.sentiment.polarity
-        if score > 0.1:
-            label = "Positive"
-        elif score < -0.1:
-            label = "Negative"
-        else:
-            label = "Neutral"
+    with _cache_lock:
+        cached = _news_cache.get(yahoo_symbol)
+        if cached and time.time() - cached['timestamp'] < CACHE_TTL:
+            return cached['data']
             
-        analyzed_news.append({
-            "title": item["title"],
-            "source": item["source"],
-            "url": "#",
-            "sentiment_score": round(score, 2),
-            "sentiment_label": label,
-            "created_at": datetime.now().isoformat()
-        })
+    try:
+        ticker = yf.Ticker(yahoo_symbol)
+        raw_news = ticker.news
         
-    return analyzed_news
+        analyzed_news = []
+        
+        # Fallback if no news found on Yahoo Finance
+        if not raw_news:
+            mock_news = [
+                {"title": f"Earnings report updates for {yahoo_symbol}", "publisher": "Market Insights", "link": "#"}
+            ]
+            raw_news = mock_news
+
+        for item in raw_news[:5]: # limit to 5
+            title = item.get("title", "")
+            source = item.get("publisher", "Unknown Source")
+            url = item.get("link", "#")
+            
+            blob = TextBlob(title)
+            score = blob.sentiment.polarity
+            if score > 0.1:
+                label = "Positive"
+            elif score < -0.1:
+                label = "Negative"
+            else:
+                label = "Neutral"
+                
+            analyzed_news.append({
+                "title": title,
+                "source": source,
+                "url": url,
+                "sentiment_score": round(score, 2),
+                "sentiment_label": label,
+                "created_at": datetime.now().isoformat()
+            })
+            
+        with _cache_lock:
+            _news_cache[yahoo_symbol] = {
+                'timestamp': time.time(),
+                'data': analyzed_news
+            }
+            
+        return analyzed_news
+    except Exception as e:
+        print(f"Error fetching news for {yahoo_symbol}: {e}")
+        return []

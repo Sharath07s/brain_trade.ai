@@ -35,6 +35,9 @@ def fetch_search_results(query: str) -> list:
                 "type": quote_type
             })
             
+        # Prioritize Indian stocks (.NS and .BO)
+        formatted_results.sort(key=lambda x: 0 if x["symbol"].endswith('.NS') or x["symbol"].endswith('.BO') else 1)
+            
         return formatted_results
     except Exception as e:
         print(f"Search API Error: {e}")
