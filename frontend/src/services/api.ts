@@ -29,3 +29,9 @@ export const searchStocks = async (query: string) => {
   if (!res.ok) throw new Error("Failed to search stocks");
   return res.json();
 };
+
+export const getMarketIndices = async () => {
+  const res = await fetch(`${API_BASE}/stock/indices`);
+  if (!res.ok) throw new Error("Failed to fetch market indices");
+  return res.json();
+};

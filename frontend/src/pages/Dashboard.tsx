@@ -3,6 +3,7 @@ import { getPrediction, getStock, getSentiment, getNews } from '../services/api'
 import { motion, AnimatePresence } from 'framer-motion';
 import { TrendingUp, TrendingDown, Target, Brain, AlertCircle, RefreshCcw, Newspaper, Activity, Clock, Zap } from 'lucide-react';
 import TradingViewChart from '../components/TradingViewChart';
+import IntradayPanel from '../components/IntradayPanel';
 import { useGlobalContext } from '../context/GlobalContext';
 import { useParams } from 'react-router-dom';
 
@@ -239,6 +240,11 @@ const Dashboard = () => {
             animate={{ opacity: 1, y: 0 }}
             className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full"
             >
+
+            {/* Intraday Panel Section (Moved to the absolute top of the dashboard to prevent scrolling issues) */}
+            <div className="lg:col-span-3 w-full mb-2">
+                <IntradayPanel />
+            </div>
             
             {/* Headers / Price */}
             <div className="lg:col-span-3 flex justify-between items-end glass p-6 rounded-3xl relative overflow-hidden">

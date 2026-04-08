@@ -58,16 +58,24 @@ def get_real_time_stock(symbol: str, timeframe: str = "1M") -> dict:
             currency = 'INR'
         
         # Get historical OHLC for chart
-        if timeframe == '1D':
-            hist_data = ticker.history(period="1d", interval="1m")
+        if timeframe == '1m':
+            period, interval = "1d", "1m"
+        elif timeframe == '5m':
+            period, interval = "1d", "5m" # Yahoo finance might throw issues if too many days on 1m/5m, 1d/5d is safe
+        elif timeframe == '15m':
+            period, interval = "5d", "15m"
+        elif timeframe == '1D':
+            period, interval = "1d", "1m"
         elif timeframe == '5D':
-            hist_data = ticker.history(period="5d", interval="15m")
-        else: # 1M
-            hist_data = ticker.history(period="1mo", interval="1d")
+            period, interval = "5d", "15m"
+        else: # 1M default
+            period, interval = "1mo", "1d"
+            
+        hist_data = ticker.history(period=period, interval=interval)
 
         history = []
         for index, row in hist_data.iterrows():
-            if timeframe in ['1D', '5D']:
+            if 'm' in interval or 'h' in interval:
                 t_val = int(index.timestamp()) # UNIX timestamp (seconds) for TradingView intraday
             else:
                 t_val = index.strftime("%Y-%m-%d") # string for daily
@@ -112,3 +120,52 @@ def get_real_time_stock(symbol: str, timeframe: str = "1M") -> dict:
         import traceback
         traceback.print_exc()
         return {"error": str(e)}
+
+def get_market_indices() -> list:
+    """Fetches real-time summary for core Indian Indices."""
+    indices = [
+        {"symbol": "^NSEI", "name": "NIFTY 50"},
+        {"symbol": "^BSESN", "name": "SENSEX"},
+        {"symbol": "^NSEBANK", "name": "BANKNIFTY"},
+        {"symbol": "BSE-BANK.BO", "name": "BANKEX"}
+    ]
+    
+    cache_key = "market_indices_batch"
+    with _cache_lock:
+        cached = _stock_cache.get(cache_key)
+        if cached and time.time() - cached['timestamp'] < CACHE_TTL * 2: # Cache indices a bit longer (10s)
+            return cached['data']
+            
+    results = []
+    try:
+        # Loop sequentially for reliability, fast enough for 4 indices
+        for idx in indices:
+            sym = idx['symbol']
+            try:
+                ticker = yf.Ticker(sym)
+                data = ticker.history(period="1d")
+                if not data.empty:
+                    current = float(data['Close'].iloc[-1])
+                    previous_close = float(ticker.info.get('previousClose', data['Open'].iloc[0]))
+                    change = current - previous_close
+                    change_percent = (change / previous_close) * 100
+                    results.append({
+                        "id": idx['name'],
+                        "symbol": sym,
+                        "name": idx['name'],
+                        "price": current,
+                        "change": change,
+                        "change_percent": change_percent
+                    })
+            except Exception as e:
+                print(f"Failed to fetch index {sym}: {e}")
+
+        with _cache_lock:
+            _stock_cache[cache_key] = {
+                'timestamp': time.time(),
+                'data': results
+            }
+        return results
+    except Exception as e:
+        print(f"Batch index error: {e}")
+        return []

@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { GlobalProvider } from './context/GlobalContext';
 import Layout from './layout/Layout';
+import DisclaimerModal from './components/DisclaimerModal';
 
 // Pages
 import Dashboard from './pages/Dashboard';
@@ -13,6 +14,7 @@ import Settings from './pages/Settings';
 function App() {
   return (
     <GlobalProvider>
+      <DisclaimerModal />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
