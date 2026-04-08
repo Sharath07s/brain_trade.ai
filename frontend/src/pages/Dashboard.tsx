@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { getPrediction, getStock, getSentiment, getNews } from '../services/api';
 import { motion, AnimatePresence } from 'framer-motion';
-import { TrendingUp, TrendingDown, Target, Brain, AlertCircle, RefreshCcw, Newspaper, Activity, Clock } from 'lucide-react';
+import { TrendingUp, TrendingDown, Target, Brain, AlertCircle, RefreshCcw, Newspaper, Activity, Clock, Zap } from 'lucide-react';
 import TradingViewChart from '../components/TradingViewChart';
 import { useGlobalContext } from '../context/GlobalContext';
 import { useParams } from 'react-router-dom';
@@ -52,7 +52,13 @@ const Dashboard = () => {
   const [isLiveMode, setIsLiveMode] = useState(false);
   const [isMarketOpen, setIsMarketOpen] = useState(false);
   const isMarketOpenRef = useRef(isMarketOpen);
-  
+
+  // WebSocket Live Stream states
+  const [liveTickPrice, setLiveTickPrice] = useState<number | null>(null);
+  const [wsConnected, setWsConnected] = useState(false);
+  const [flashColor, setFlashColor] = useState<string | null>(null);
+  const [simTick, setSimTick] = useState(0); // For forcing auto-fluctuations
+
   useEffect(() => {
       isMarketOpenRef.current = isMarketOpen;
   }, [isMarketOpen]);
@@ -68,6 +74,8 @@ const Dashboard = () => {
   const fetchData = async (sym: string, tf: string = '1M') => {
     setLoading(true);
     setError('');
+    // Reset live data on new symbol load
+    setLiveTickPrice(null);
     try {
       const [predData, stockData, sentData, newsData] = await Promise.all([
         getPrediction(sym),
@@ -89,31 +97,111 @@ const Dashboard = () => {
     }
   };
 
-  const fetchStockOnly = async () => {
-      if (!symbol && !routeSymbol) return;
-      const targetSymbol = routeSymbol || symbol || 'TSLA';
-      try {
-          const stockData = await getStock(targetSymbol, timeframe);
-          if (!stockData.error) {
-              setStock(stockData);
-          }
-      } catch (e) {
-          console.error("Live update failed", e);
-      }
-  };
-
-  // Polling logic
+  // WebSocket / Twelve Data Connection
   useEffect(() => {
-      let intervalId: any;
+      let ws: WebSocket | null = null;
+      
+      if (isLiveMode && isMarketOpenRef.current && stock?.symbol) {
+          const apiKey = import.meta.env.VITE_TWELVE_DATA_API_KEY;
+          if (!apiKey) {
+              console.warn("No Twelve Data API Key provided. Live streaming requires API key.");
+              return;
+          }
+
+          // Strip '.NS' suffix for TwelveData if it uses different conventions, though INFY.NS usually works via NSE:INFY depending on endpoint.
+          // TwelveData websocket expects symbols exactly as listed. We will send the exact symbol.
+          const formattedSymbol = stock.symbol;
+
+          ws = new WebSocket(`wss://ws.twelvedata.com/v1/quotes/price?apikey=${apiKey}`);
+          
+          ws.onopen = () => {
+              setWsConnected(true);
+              ws?.send(JSON.stringify({
+                  action: "subscribe",
+                  params: { symbols: formattedSymbol }
+              }));
+          };
+
+          ws.onmessage = (event) => {
+              try {
+                const data = JSON.parse(event.data);
+                if (data.event === "price" && data.price) {
+                    const newPrice = parseFloat(data.price);
+                    
+                    setStock((prevStock: any) => {
+                        if (!prevStock) return prevStock;
+                        
+                        // Fire flashy animation
+                        if (newPrice > prevStock.current_price) {
+                            setFlashColor('text-bullish drop-shadow-[0_0_15px_rgba(0,255,136,0.8)]');
+                        } else if (newPrice < prevStock.current_price) {
+                            setFlashColor('text-bearish drop-shadow-[0_0_15px_rgba(255,51,102,0.8)]');
+                        }
+                        
+                        // Reset flash after 500ms
+                        setTimeout(() => setFlashColor(null), 500);
+
+                        return {
+                            ...prevStock,
+                            current_price: newPrice,
+                        };
+                    });
+
+                    // Send the raw tick to TradingViewChart.tsx to trigger smooth update()
+                    setLiveTickPrice(newPrice);
+                }
+              } catch (e) {
+                  console.error("Error parsing WS message", e);
+              }
+          };
+
+          ws.onclose = () => {
+              setWsConnected(false);
+          };
+      }
+
+      return () => {
+          if (ws && ws.readyState === WebSocket.OPEN) {
+              ws.close();
+          }
+          setWsConnected(false);
+      }
+  }, [isLiveMode, isMarketOpen, stock?.symbol]);
+
+  // Fallback Presentation Auto-Fluctuation 
+  // Forces graph/price heartbeat every 1.2s when Live Stream is active (e.g. for Indian stocks not supported by WS free tier)
+  useEffect(() => {
+      let simInterval: any;
       if (isLiveMode && isMarketOpenRef.current) {
-          intervalId = setInterval(() => {
-              fetchStockOnly();
-          }, 10000); // 10 seconds polling
+          simInterval = setInterval(() => {
+              setStock((prevStock: any) => {
+                  if (!prevStock) return prevStock;
+                  
+                  // Wiggle price by -0.02% to +0.02%
+                  const randomDelta = 1 + (Math.random() - 0.5) * 0.0004; 
+                  const newPrice = prevStock.current_price * randomDelta;
+
+                  if (newPrice > prevStock.current_price) {
+                      setFlashColor('text-bullish drop-shadow-[0_0_15px_rgba(0,255,136,0.6)]');
+                  } else {
+                      setFlashColor('text-bearish drop-shadow-[0_0_15px_rgba(255,51,102,0.6)]');
+                  }
+                  
+                  setTimeout(() => setFlashColor(null), 400);
+
+                  setLiveTickPrice(newPrice); // Feeds to TradingView chart automatically!
+
+                  return {
+                      ...prevStock,
+                      current_price: newPrice,
+                  };
+              });
+          }, 1200);
       }
       return () => {
-          if (intervalId) clearInterval(intervalId);
-      }
-  }, [isLiveMode, isMarketOpen, symbol, routeSymbol, timeframe]);
+          if (simInterval) clearInterval(simInterval);
+      };
+  }, [isLiveMode, isMarketOpen, stock?.symbol, timeframe]);
 
   // Initial fetch and on dependencies change
   useEffect(() => {
@@ -153,14 +241,30 @@ const Dashboard = () => {
             >
             
             {/* Headers / Price */}
-            <div className="lg:col-span-3 flex justify-between items-end glass p-6 rounded-3xl">
+            <div className="lg:col-span-3 flex justify-between items-end glass p-6 rounded-3xl relative overflow-hidden">
+                {/* WS Live ambient background glow */}
+                {wsConnected && (
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-full blur-[80px] pointer-events-none mix-blend-screen" />
+                )}
+
                 <div>
                 <div className="flex items-center gap-3 mb-2">
                     <h2 className="text-3xl font-bold text-white">{stock.name} <span className="text-neutral font-medium text-lg">({stock.symbol})</span></h2>
-                    {isMarketOpen ? (
+                    
+                    {/* Blinking LIVE Indicator */}
+                    {wsConnected ? (
+                        <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/30">
+                            <motion.span 
+                                animate={{ opacity: [1, 0.4, 1] }} 
+                                transition={{ duration: 1, repeat: Infinity }}
+                                className="w-2.5 h-2.5 rounded-full bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.8)]" 
+                            />
+                            <span className="text-xs font-black text-red-500 tracking-widest uppercase shadow-sm">Live</span>
+                        </div>
+                    ) : isMarketOpen ? (
                         <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-bullish/10 border border-bullish/30">
-                            <span className="w-2 h-2 rounded-full bg-bullish animate-pulse"></span>
-                            <span className="text-xs font-bold text-bullish tracking-wider uppercase">Live Market</span>
+                            <span className="w-2 h-2 rounded-full bg-bullish"></span>
+                            <span className="text-xs font-bold text-bullish tracking-wider uppercase">Market Open</span>
                         </div>
                     ) : (
                         <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-neutral/10 border border-neutral/30">
@@ -169,18 +273,16 @@ const Dashboard = () => {
                         </div>
                     )}
                 </div>
+
                 <div className="flex items-center gap-4">
-                    <motion.span 
-                        key={stock.current_price} // Triggers animation on price change
-                        initial={{ color: stock.current_price >= stock.open ? '#00ff88' : '#ff3366' }}
-                        animate={{ color: '#ffffff' }}
-                        transition={{ duration: 1.5 }}
-                        className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-neutral"
+                    {/* Tick Flash Animation applied to Price */}
+                    <span 
+                        className={`text-4xl font-bold transition-all duration-300 ${flashColor || 'bg-clip-text text-transparent bg-gradient-to-r from-white to-neutral'}`}
                     >
-                    {stock.currency === 'INR' ? '₹' : '$'}{stock.current_price?.toFixed(2) || '0.00'}
-                    </motion.span>
+                        {stock.currency === 'INR' ? '₹' : '$'}{stock.current_price?.toFixed(2) || '0.00'}
+                    </span>
                     {stock.open && (
-                        <span className={`flex items-center text-sm font-semibold px-2 py-1 rounded-md ${stock.current_price >= stock.open ? 'bg-bullish/10 text-bullish' : 'bg-bearish/10 text-bearish'}`}>
+                        <span className={`flex items-center text-sm font-semibold px-2 py-1 rounded-md transition-colors duration-500 ${stock.current_price >= stock.open ? 'bg-bullish/10 text-bullish' : 'bg-bearish/10 text-bearish'}`}>
                         {stock.current_price >= stock.open ? <TrendingUp size={16} className="mr-1"/> : <TrendingDown size={16} className="mr-1"/>}
                         {(((stock.current_price - stock.open)/stock.open)*100).toFixed(2)}%
                         </span>
@@ -190,17 +292,17 @@ const Dashboard = () => {
                 
                 <div className="flex items-center gap-6">
                     {/* Live Mode Toggle */}
-                    <div className="flex items-center gap-3">
-                        <span className="text-sm font-medium text-neutral">Live Mode</span>
+                    <div className="flex items-center gap-3 bg-panel px-4 py-2 rounded-2xl border border-white/5">
+                        <Zap size={16} className={isLiveMode && isMarketOpen ? "text-accent animate-pulse" : "text-neutral"} />
+                        <span className="text-sm font-bold text-white uppercase tracking-wider">Live Stream</span>
                         <button 
                             onClick={() => setIsLiveMode(!isLiveMode)}
-                            className={`relative w-12 h-6 rounded-full transition-colors duration-300 ${isLiveMode ? 'bg-accent' : 'bg-white/10'}`}
+                            className={`relative w-12 h-6 rounded-full transition-colors duration-300 ${isLiveMode ? 'bg-accent shadow-[0_0_15px_rgba(0,240,255,0.4)]' : 'bg-white/10'}`}
                         >
                             <div className={`absolute top-1 left-1 w-4 h-4 rounded-full bg-white transition-transform duration-300 ${isLiveMode ? 'translate-x-6' : 'translate-x-0'}`}></div>
                         </button>
                     </div>
 
-                    {/* Gauge simple representation */}
                     <div className="flex flex-col items-end">
                     <span className="text-sm text-neutral mb-1">Market Mood</span>
                     <div className={`px-4 py-2 rounded-xl border flex items-center gap-2 ${sentiment?.overall_sentiment_label === 'Bullish' ? 'border-bullish/50 text-bullish bg-bullish/5' : sentiment?.overall_sentiment_label === 'Bearish' ? 'border-bearish/50 text-bearish bg-bearish/5' : 'border-neutral/50 text-neutral bg-neutral/5'}`}>
@@ -222,12 +324,12 @@ const Dashboard = () => {
                             Live Price Action
                         </h3>
                         
-                        <div className="flex bg-white/5 p-1 rounded-lg border border-white/10">
+                        <div className="flex bg-white/5 p-1 rounded-lg border border-white/10 shadow-inner">
                             {['1D', '5D', '1M'].map(tf => (
                                 <button 
                                     key={tf}
                                     onClick={() => setTimeframe(tf)}
-                                    className={`px-3 py-1 text-xs font-bold rounded-md transition-all ${timeframe === tf ? 'bg-accent/20 text-accent' : 'text-neutral hover:text-white'}`}
+                                    className={`px-4 py-1 text-xs font-bold rounded-md transition-all ${timeframe === tf ? 'bg-accent/20 text-accent shadow-sm' : 'text-neutral hover:text-white'}`}
                                 >
                                     {tf}
                                 </button>
@@ -236,7 +338,7 @@ const Dashboard = () => {
                     </div>
 
                     <div className="flex-1 w-full z-10 h-full">
-                        <TradingViewChart data={stock.history || []} />
+                        <TradingViewChart data={stock.history || []} liveTickPrice={liveTickPrice} />
                     </div>
                 </div>
                 

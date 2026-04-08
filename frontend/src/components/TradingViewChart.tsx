@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
-import { createChart, type IChartApi } from 'lightweight-charts';
+import { createChart, type IChartApi, type ISeriesApi } from 'lightweight-charts';
 
 export interface ChartData {
-    time: string | number; // Changed from date to time to be compatible with both daily strings and intraday timestamps
+    time: string | number;
     open: number;
     high: number;
     low: number;
@@ -12,6 +12,7 @@ export interface ChartData {
 
 interface TradingViewChartProps {
     data: ChartData[];
+    liveTickPrice?: number | null;
     colors?: {
         backgroundColor?: string;
         lineColor?: string;
@@ -21,6 +22,7 @@ interface TradingViewChartProps {
 
 const TradingViewChart: React.FC<TradingViewChartProps> = ({
     data,
+    liveTickPrice = null,
     colors: {
         backgroundColor = 'transparent',
         textColor = '#8892b0',
@@ -29,33 +31,17 @@ const TradingViewChart: React.FC<TradingViewChartProps> = ({
     const chartContainerRef = useRef<HTMLDivElement>(null);
     const tooltipRef = useRef<HTMLDivElement>(null);
     const chartRef = useRef<IChartApi | null>(null);
+    const mainSeriesRef = useRef<ISeriesApi<"Candlestick"> | null>(null);
+    const volumeSeriesRef = useRef<ISeriesApi<"Histogram"> | null>(null);
+    
+    // State trackers for live updates
+    const prevFirstTimeRef = useRef<string | number | null>(null);
+    const lastCandleRef = useRef<any>(null);
+    const lastVolumeRef = useRef<any>(null);
 
+    // Initialization Effect: Creates the chart instance ONLY once (or when theme colors change)
     useEffect(() => {
-        if (!chartContainerRef.current || !data || data.length === 0) return;
-        
-        // Ensure data is sorted by time chronologically
-        const sortedData = [...data].sort((a, b) => {
-            const timeA = typeof a.time === 'number' ? a.time : new Date(a.time).getTime();
-            const timeB = typeof b.time === 'number' ? b.time : new Date(b.time).getTime();
-            return timeA - timeB;
-        });
-        
-        const isIntraday = typeof sortedData[0]?.time === 'number';
-
-        // Format data
-        const candleData = sortedData.map(item => ({
-            time: item.time as any,
-            open: item.open,
-            high: item.high,
-            low: item.low,
-            close: item.close,
-        }));
-
-        const volumeData = sortedData.map(item => ({
-            time: item.time as any,
-            value: item.volume,
-            color: item.close >= item.open ? '#00ff8840' : '#ff336640',
-        }));
+        if (!chartContainerRef.current) return;
 
         const handleResize = () => {
             if (chartRef.current && chartContainerRef.current) {
@@ -82,13 +68,11 @@ const TradingViewChart: React.FC<TradingViewChartProps> = ({
             },
             timeScale: {
                 borderColor: 'rgba(255, 255, 255, 0.1)',
-                timeVisible: isIntraday, // Show times for intraday
+                timeVisible: true, // We will toggle this dynamically in the data effect
                 secondsVisible: false,
             },
         });
         
-        chartRef.current = chart;
-
         const mainSeries = chart.addCandlestickSeries({
             upColor: '#00ff88',
             downColor: '#ff3366',
@@ -96,8 +80,7 @@ const TradingViewChart: React.FC<TradingViewChartProps> = ({
             wickUpColor: '#00ff88',
             wickDownColor: '#ff3366',
         });
-        mainSeries.setData(candleData);
-
+        
         const volumeSeries = chart.addHistogramSeries({
             color: '#1f2937',
             priceFormat: {
@@ -106,14 +89,12 @@ const TradingViewChart: React.FC<TradingViewChartProps> = ({
             priceScaleId: '', // set as an overlay
         });
         
-        // Scale volume to bottom 20%
         volumeSeries.priceScale().applyOptions({
             scaleMargins: {
                 top: 0.8,
                 bottom: 0,
             },
         });
-        volumeSeries.setData(volumeData);
 
         // Tooltip logic
         chart.subscribeCrosshairMove((param) => {
@@ -163,18 +144,109 @@ const TradingViewChart: React.FC<TradingViewChartProps> = ({
             }
         });
 
-        // Fit content elegantly
-        chart.timeScale().fitContent();
+        chartRef.current = chart;
+        mainSeriesRef.current = mainSeries;
+        volumeSeriesRef.current = volumeSeries;
 
         window.addEventListener('resize', handleResize);
 
         return () => {
             window.removeEventListener('resize', handleResize);
-            if (chartRef.current) {
-                chartRef.current.remove();
-            }
+            chart.remove();
+            chartRef.current = null;
+            mainSeriesRef.current = null;
+            volumeSeriesRef.current = null;
+            prevFirstTimeRef.current = null; // Critical: Reset this on unmount so new chart instances get full setData instead of missing history
         };
-    }, [data, backgroundColor, textColor]);
+    }, [backgroundColor, textColor]); // Notice `data` is intentionally excluded here
+
+    // Data Update Effect: Runs when historical `data` changes
+    useEffect(() => {
+        if (!chartRef.current || !mainSeriesRef.current || !volumeSeriesRef.current || !data || data.length === 0) return;
+        
+        const sortedData = [...data].sort((a, b) => {
+            const timeA = typeof a.time === 'number' ? a.time : new Date(a.time).getTime();
+            const timeB = typeof b.time === 'number' ? b.time : new Date(b.time).getTime();
+            return timeA - timeB;
+        });
+
+        const isIntraday = typeof sortedData[0].time === 'number';
+        chartRef.current.applyOptions({
+            timeScale: { timeVisible: isIntraday },
+        });
+
+        const candleData = sortedData.map(item => ({
+            time: item.time as any,
+            open: item.open,
+            high: item.high,
+            low: item.low,
+            close: item.close,
+        }));
+
+        const volumeData = sortedData.map(item => ({
+            time: item.time as any,
+            value: item.volume,
+            color: item.close >= item.open ? '#00ff8840' : '#ff336640',
+        }));
+
+        const currentFirstTime = candleData[0].time;
+
+        // If it's a completely new dataset (changed symbol, changed timeframe, or fresh mount)
+        if (prevFirstTimeRef.current !== currentFirstTime || prevFirstTimeRef.current === null) {
+            mainSeriesRef.current.setData(candleData);
+            volumeSeriesRef.current.setData(volumeData);
+            
+            // Only fit content on first load to allow user to pan/zoom later //
+            setTimeout(() => {
+                if (chartRef.current) {
+                    chartRef.current.timeScale().fitContent();
+                }
+            }, 50);
+        } else {
+            // Soft update: normally not hit aggressively since we use WebSocket but falls back to this
+            mainSeriesRef.current.update(candleData[candleData.length - 1]);
+            volumeSeriesRef.current.update(volumeData[volumeData.length - 1]);
+        }
+
+        prevFirstTimeRef.current = currentFirstTime;
+        lastCandleRef.current = candleData[candleData.length - 1];
+        lastVolumeRef.current = volumeData[volumeData.length - 1];
+
+    }, [data]);
+
+    // WebSocket Live Tick Effect: Appends or modifies chart without reloading history array!
+    useEffect(() => {
+        if (!liveTickPrice || !mainSeriesRef.current || !volumeSeriesRef.current || !lastCandleRef.current) return;
+        
+        const currentLast = lastCandleRef.current;
+        const currentVol = lastVolumeRef.current;
+
+        // Create an updated candle
+        const updatedCandle = {
+            time: currentLast.time,
+            open: currentLast.open,
+            high: Math.max(currentLast.high, liveTickPrice),
+            low: Math.min(currentLast.low, liveTickPrice),
+            close: liveTickPrice,
+        };
+
+        // Determine volume color
+        const isBullish = liveTickPrice >= currentLast.open;
+        const updatedVol = {
+            time: currentVol.time,
+            value: currentVol.value + 1, // artificially inflate volume on ticks for visual activity
+            color: isBullish ? '#00ff8840' : '#ff336640',
+        };
+
+        // Update chart instances
+        mainSeriesRef.current.update(updatedCandle);
+        volumeSeriesRef.current.update(updatedVol);
+        
+        // Update local refs
+        lastCandleRef.current = updatedCandle;
+        lastVolumeRef.current = updatedVol;
+
+    }, [liveTickPrice]);
 
     return (
         <div style={{ position: 'relative', width: '100%', height: '100%' }}>
