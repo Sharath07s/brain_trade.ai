@@ -56,15 +56,19 @@ def get_real_time_stock(symbol: str) -> dict:
         if yahoo_symbol.endswith('.NS') or yahoo_symbol.endswith('.BO') or exchange == 'NSI':
             currency = 'INR'
         
-        # Get historical 7 days
-        hist_data = ticker.history(period="7d")
+        # Get historical OHLC for chart (1mo for better candlestick rendering)
+        hist_data = ticker.history(period="1mo")
         history = []
         for index, row in hist_data.iterrows():
             history.append({
                 "date": index.strftime("%Y-%m-%d"),
+                "open": float(row['Open']),
+                "high": float(row['High']),
+                "low": float(row['Low']),
                 "close": float(row['Close']),
                 "volume": int(row['Volume'])
             })
+
             
         result = {
             "symbol": original_symbol,

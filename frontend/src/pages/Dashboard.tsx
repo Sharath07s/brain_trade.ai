@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getPrediction, getStock, getSentiment, getNews } from '../services/api';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TrendingUp, TrendingDown, Target, Brain, AlertCircle, RefreshCcw, Newspaper } from 'lucide-react';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import TradingViewChart from '../components/TradingViewChart';
 import { useGlobalContext } from '../context/GlobalContext';
 import { useParams } from 'react-router-dom';
 
@@ -119,26 +119,9 @@ const Dashboard = () => {
             <div className="lg:col-span-2 space-y-6">
                 <div className="glass p-6 rounded-3xl h-[400px] flex flex-col relative overflow-hidden group">
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-accent/5 rounded-full blur-[100px] pointer-events-none"></div>
-                    <h3 className="font-semibold text-white mb-4 z-10">7-Day Price Trend</h3>
-                    <div className="flex-1 w-full z-10">
-                    <ResponsiveContainer width="100%" height="100%">
-                        <AreaChart data={stock.history || []}>
-                            <defs>
-                            <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="5%" stopColor={stock.current_price >= stock.open ? '#00ff88' : '#ff3366'} stopOpacity={0.3}/>
-                                <stop offset="95%" stopColor={stock.current_price >= stock.open ? '#00ff88' : '#ff3366'} stopOpacity={0}/>
-                            </linearGradient>
-                            </defs>
-                            <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" vertical={false} />
-                            <XAxis dataKey="date" stroke="#8892b0" fontSize={12} tickMargin={10} axisLine={false} tickLine={false} />
-                            <YAxis domain={['auto', 'auto']} stroke="#8892b0" fontSize={12} tickFormatter={(val) => `${stock.currency === 'INR' ? '₹' : '$'}${val}`} axisLine={false} tickLine={false} />
-                            <Tooltip 
-                            contentStyle={{ backgroundColor: '#13141f', borderColor: '#ffffff20', borderRadius: '12px' }}
-                            itemStyle={{ color: '#fff' }}
-                            />
-                            <Area type="monotone" dataKey="close" stroke={stock.current_price >= stock.open ? '#00ff88' : '#ff3366'} strokeWidth={3} fillOpacity={1} fill="url(#colorPrice)" />
-                        </AreaChart>
-                    </ResponsiveContainer>
+                    <h3 className="font-semibold text-white mb-4 z-10">1-Month Price Trend</h3>
+                    <div className="flex-1 w-full z-10 h-full">
+                        <TradingViewChart data={stock.history || []} />
                     </div>
                 </div>
                 
