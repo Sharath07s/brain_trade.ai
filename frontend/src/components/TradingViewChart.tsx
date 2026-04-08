@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
-import { createChart } from 'lightweight-charts';
+import { createChart, type IChartApi } from 'lightweight-charts';
 
 export interface ChartData {
-    date: string;
+    time: string | number; // Changed from date to time to be compatible with both daily strings and intraday timestamps
     open: number;
     high: number;
     low: number;
@@ -27,17 +27,24 @@ const TradingViewChart: React.FC<TradingViewChartProps> = ({
     } = {},
 }) => {
     const chartContainerRef = useRef<HTMLDivElement>(null);
-    const chartRef = useRef<any>(null);
+    const tooltipRef = useRef<HTMLDivElement>(null);
+    const chartRef = useRef<IChartApi | null>(null);
 
     useEffect(() => {
         if (!chartContainerRef.current || !data || data.length === 0) return;
         
         // Ensure data is sorted by time chronologically
-        const sortedData = [...data].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+        const sortedData = [...data].sort((a, b) => {
+            const timeA = typeof a.time === 'number' ? a.time : new Date(a.time).getTime();
+            const timeB = typeof b.time === 'number' ? b.time : new Date(b.time).getTime();
+            return timeA - timeB;
+        });
         
+        const isIntraday = typeof sortedData[0]?.time === 'number';
+
         // Format data
         const candleData = sortedData.map(item => ({
-            time: item.date,
+            time: item.time as any,
             open: item.open,
             high: item.high,
             low: item.low,
@@ -45,7 +52,7 @@ const TradingViewChart: React.FC<TradingViewChartProps> = ({
         }));
 
         const volumeData = sortedData.map(item => ({
-            time: item.date,
+            time: item.time as any,
             value: item.volume,
             color: item.close >= item.open ? '#00ff8840' : '#ff336640',
         }));
@@ -68,14 +75,15 @@ const TradingViewChart: React.FC<TradingViewChartProps> = ({
             width: chartContainerRef.current.clientWidth,
             height: chartContainerRef.current.clientHeight || 350,
             crosshair: {
-                mode: 0 as any, // CrosshairMode.Normal is 0
+                mode: 0 as any, // CrosshairMode.Normal
             },
             rightPriceScale: {
                 borderColor: 'rgba(255, 255, 255, 0.1)',
             },
             timeScale: {
                 borderColor: 'rgba(255, 255, 255, 0.1)',
-                timeVisible: false,
+                timeVisible: isIntraday, // Show times for intraday
+                secondsVisible: false,
             },
         });
         
@@ -107,6 +115,54 @@ const TradingViewChart: React.FC<TradingViewChartProps> = ({
         });
         volumeSeries.setData(volumeData);
 
+        // Tooltip logic
+        chart.subscribeCrosshairMove((param) => {
+            if (!tooltipRef.current) return;
+            
+            if (
+                param.point === undefined ||
+                !param.time ||
+                param.point.x < 0 ||
+                param.point.x > chartContainerRef.current!.clientWidth ||
+                param.point.y < 0 ||
+                param.point.y > chartContainerRef.current!.clientHeight
+            ) {
+                tooltipRef.current.style.display = 'none';
+                return;
+            }
+
+            const dataPoint = param.seriesData.get(mainSeries) as any;
+            const volPoint = param.seriesData.get(volumeSeries) as any;
+            
+            if (dataPoint) {
+                tooltipRef.current.style.display = 'block';
+                const open = dataPoint.open.toFixed(2);
+                const high = dataPoint.high.toFixed(2);
+                const low = dataPoint.low.toFixed(2);
+                const close = dataPoint.close.toFixed(2);
+                const vol = volPoint ? (volPoint.value >= 1e6 ? (volPoint.value / 1e6).toFixed(2) + 'M' : volPoint.value >= 1e3 ? (volPoint.value / 1e3).toFixed(2) + 'K' : volPoint.value) : '0';
+                
+                let timeStr = '';
+                if (typeof param.time === 'string') {
+                    timeStr = param.time;
+                } else if (typeof param.time === 'number') {
+                    const d = new Date(param.time * 1000);
+                    timeStr = `${d.getFullYear()}-${(d.getMonth()+1).toString().padStart(2,'0')}-${d.getDate().toString().padStart(2,'0')} ${d.getHours().toString().padStart(2,'0')}:${d.getMinutes().toString().padStart(2,'0')}`;
+                }
+
+                tooltipRef.current.innerHTML = `
+                    <div style="font-size: 12px; margin-bottom: 4px; color: ${textColor}">${timeStr}</div>
+                    <div style="font-size: 13px; font-weight: bold; color: white;">
+                        O: <span style="color: ${open <= close ? '#00ff88' : '#ff3366'}">${open}</span>
+                        H: <span style="color: ${textColor}">${high}</span>
+                        L: <span style="color: ${textColor}">${low}</span>
+                        C: <span style="color: ${open <= close ? '#00ff88' : '#ff3366'}">${close}</span>
+                    </div>
+                    <div style="font-size: 12px; color: ${textColor}; margin-top: 2px;">Vol: ${vol}</div>
+                `;
+            }
+        });
+
         // Fit content elegantly
         chart.timeScale().fitContent();
 
@@ -121,10 +177,31 @@ const TradingViewChart: React.FC<TradingViewChartProps> = ({
     }, [data, backgroundColor, textColor]);
 
     return (
-        <div 
-            ref={chartContainerRef} 
-            style={{ width: '100%', height: '100%', minHeight: '350px' }} 
-        />
+        <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+            <div 
+                ref={tooltipRef} 
+                style={{ 
+                    position: 'absolute', 
+                    display: 'none', 
+                    padding: '8px', 
+                    boxSizing: 'border-box', 
+                    fontSize: '12px', 
+                    textAlign: 'left', 
+                    zIndex: 1000, 
+                    top: '12px', 
+                    left: '12px', 
+                    pointerEvents: 'none', 
+                    background: 'rgba(0, 0, 0, 0.7)',
+                    border: '1px solid rgba(255,255,255,0.1)',
+                    borderRadius: '8px',
+                    backdropFilter: 'blur(4px)'
+                }} 
+            />
+            <div 
+                ref={chartContainerRef} 
+                style={{ width: '100%', height: '100%', minHeight: '350px' }} 
+            />
+        </div>
     );
 };
 

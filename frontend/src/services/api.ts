@@ -6,8 +6,8 @@ export const getPrediction = async (symbol: string) => {
   return res.json();
 };
 
-export const getStock = async (symbol: string) => {
-  const res = await fetch(`${API_BASE}/stock/${symbol}`);
+export const getStock = async (symbol: string, timeframe: string = "1M") => {
+  const res = await fetch(`${API_BASE}/stock/${symbol}?timeframe=${timeframe}`);
   if (!res.ok) throw new Error("Failed to fetch stock data");
   return res.json();
 };

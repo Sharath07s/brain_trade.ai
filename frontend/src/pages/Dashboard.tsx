@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { getPrediction, getStock, getSentiment, getNews } from '../services/api';
 import { motion, AnimatePresence } from 'framer-motion';
-import { TrendingUp, TrendingDown, Target, Brain, AlertCircle, RefreshCcw, Newspaper } from 'lucide-react';
+import { TrendingUp, TrendingDown, Target, Brain, AlertCircle, RefreshCcw, Newspaper, Activity, Clock } from 'lucide-react';
 import TradingViewChart from '../components/TradingViewChart';
 import { useGlobalContext } from '../context/GlobalContext';
 import { useParams } from 'react-router-dom';
@@ -15,6 +15,28 @@ const formatLargeValue = (value: number, currency: string) => {
     return sym + value.toLocaleString();
 };
 
+const checkMarketOpen = () => {
+    // Current UTC time
+    const now = new Date();
+    // Indian Standard Time (IST) is UTC + 5:30
+    const istOffset = 5.5 * 60 * 60 * 1000;
+    const istTime = new Date(now.getTime() + istOffset);
+    
+    const day = istTime.getUTCDay(); // 0(Sun) - 6(Sat)
+    const hours = istTime.getUTCHours();
+    const minutes = istTime.getUTCMinutes();
+    
+    // Weekends closed
+    if (day === 0 || day === 6) return false;
+    
+    // Open exactly after 10:00 AM IST, close at 3:30 PM (15:30) IST
+    const timeInMinutes = hours * 60 + minutes;
+    const openTime = 10 * 60; // 10:00 AM
+    const closeTime = 15 * 60 + 30; // 3:30 PM
+    
+    return timeInMinutes >= openTime && timeInMinutes < closeTime;
+};
+
 const Dashboard = () => {
   const { symbol: routeSymbol } = useParams();
   const { symbol, setSymbol } = useGlobalContext();
@@ -25,14 +47,31 @@ const Dashboard = () => {
   const [stock, setStock] = useState<any>(null);
   const [sentiment, setSentiment] = useState<any>(null);
   const [news, setNews] = useState<any>(null);
+  
+  const [timeframe, setTimeframe] = useState('1M');
+  const [isLiveMode, setIsLiveMode] = useState(false);
+  const [isMarketOpen, setIsMarketOpen] = useState(false);
+  const isMarketOpenRef = useRef(isMarketOpen);
+  
+  useEffect(() => {
+      isMarketOpenRef.current = isMarketOpen;
+  }, [isMarketOpen]);
 
-  const fetchData = async (sym: string) => {
+  // Update market status every minute
+  useEffect(() => {
+      const updateMarketStatus = () => setIsMarketOpen(checkMarketOpen());
+      updateMarketStatus();
+      const interval = setInterval(updateMarketStatus, 60000);
+      return () => clearInterval(interval);
+  }, []);
+
+  const fetchData = async (sym: string, tf: string = '1M') => {
     setLoading(true);
     setError('');
     try {
       const [predData, stockData, sentData, newsData] = await Promise.all([
         getPrediction(sym),
-        getStock(sym),
+        getStock(sym, tf),
         getSentiment(sym),
         getNews(sym)
       ]);
@@ -50,15 +89,40 @@ const Dashboard = () => {
     }
   };
 
+  const fetchStockOnly = async () => {
+      if (!symbol && !routeSymbol) return;
+      const targetSymbol = routeSymbol || symbol || 'TSLA';
+      try {
+          const stockData = await getStock(targetSymbol, timeframe);
+          if (!stockData.error) {
+              setStock(stockData);
+          }
+      } catch (e) {
+          console.error("Live update failed", e);
+      }
+  };
+
+  // Polling logic
   useEffect(() => {
-    // If URL has a symbol, sync it to global context and fetch
-    // If routeSymbol is undefined, it defaults to the context symbol
+      let intervalId: any;
+      if (isLiveMode && isMarketOpenRef.current) {
+          intervalId = setInterval(() => {
+              fetchStockOnly();
+          }, 10000); // 10 seconds polling
+      }
+      return () => {
+          if (intervalId) clearInterval(intervalId);
+      }
+  }, [isLiveMode, isMarketOpen, symbol, routeSymbol, timeframe]);
+
+  // Initial fetch and on dependencies change
+  useEffect(() => {
     const targetSymbol = routeSymbol || symbol || 'TSLA';
     if (routeSymbol && routeSymbol !== symbol) {
       setSymbol(routeSymbol);
     }
-    fetchData(targetSymbol);
-  }, [routeSymbol, symbol, setSymbol]);
+    fetchData(targetSymbol, timeframe);
+  }, [routeSymbol, symbol, setSymbol, timeframe]);
 
   return (
     <AnimatePresence mode="wait">
@@ -91,11 +155,30 @@ const Dashboard = () => {
             {/* Headers / Price */}
             <div className="lg:col-span-3 flex justify-between items-end glass p-6 rounded-3xl">
                 <div>
-                <h2 className="text-3xl font-bold text-white mb-2">{stock.name} <span className="text-neutral font-medium text-lg ml-2">({stock.symbol})</span></h2>
+                <div className="flex items-center gap-3 mb-2">
+                    <h2 className="text-3xl font-bold text-white">{stock.name} <span className="text-neutral font-medium text-lg">({stock.symbol})</span></h2>
+                    {isMarketOpen ? (
+                        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-bullish/10 border border-bullish/30">
+                            <span className="w-2 h-2 rounded-full bg-bullish animate-pulse"></span>
+                            <span className="text-xs font-bold text-bullish tracking-wider uppercase">Live Market</span>
+                        </div>
+                    ) : (
+                        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-neutral/10 border border-neutral/30">
+                            <Clock size={12} className="text-neutral" />
+                            <span className="text-xs font-bold text-neutral tracking-wider uppercase">Market Closed</span>
+                        </div>
+                    )}
+                </div>
                 <div className="flex items-center gap-4">
-                    <span className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-neutral">
+                    <motion.span 
+                        key={stock.current_price} // Triggers animation on price change
+                        initial={{ color: stock.current_price >= stock.open ? '#00ff88' : '#ff3366' }}
+                        animate={{ color: '#ffffff' }}
+                        transition={{ duration: 1.5 }}
+                        className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-neutral"
+                    >
                     {stock.currency === 'INR' ? '₹' : '$'}{stock.current_price?.toFixed(2) || '0.00'}
-                    </span>
+                    </motion.span>
                     {stock.open && (
                         <span className={`flex items-center text-sm font-semibold px-2 py-1 rounded-md ${stock.current_price >= stock.open ? 'bg-bullish/10 text-bullish' : 'bg-bearish/10 text-bearish'}`}>
                         {stock.current_price >= stock.open ? <TrendingUp size={16} className="mr-1"/> : <TrendingDown size={16} className="mr-1"/>}
@@ -105,21 +188,53 @@ const Dashboard = () => {
                 </div>
                 </div>
                 
-                {/* Gauge simple representation */}
-                <div className="flex flex-col items-end">
-                <span className="text-sm text-neutral mb-1">Market Mood</span>
-                <div className={`px-4 py-2 rounded-xl border flex items-center gap-2 ${sentiment?.overall_sentiment_label === 'Bullish' ? 'border-bullish/50 text-bullish bg-bullish/5' : sentiment?.overall_sentiment_label === 'Bearish' ? 'border-bearish/50 text-bearish bg-bearish/5' : 'border-neutral/50 text-neutral bg-neutral/5'}`}>
-                    <Target size={18} />
-                    <span className="font-bold">{sentiment?.overall_sentiment_label}</span>
-                </div>
+                <div className="flex items-center gap-6">
+                    {/* Live Mode Toggle */}
+                    <div className="flex items-center gap-3">
+                        <span className="text-sm font-medium text-neutral">Live Mode</span>
+                        <button 
+                            onClick={() => setIsLiveMode(!isLiveMode)}
+                            className={`relative w-12 h-6 rounded-full transition-colors duration-300 ${isLiveMode ? 'bg-accent' : 'bg-white/10'}`}
+                        >
+                            <div className={`absolute top-1 left-1 w-4 h-4 rounded-full bg-white transition-transform duration-300 ${isLiveMode ? 'translate-x-6' : 'translate-x-0'}`}></div>
+                        </button>
+                    </div>
+
+                    {/* Gauge simple representation */}
+                    <div className="flex flex-col items-end">
+                    <span className="text-sm text-neutral mb-1">Market Mood</span>
+                    <div className={`px-4 py-2 rounded-xl border flex items-center gap-2 ${sentiment?.overall_sentiment_label === 'Bullish' ? 'border-bullish/50 text-bullish bg-bullish/5' : sentiment?.overall_sentiment_label === 'Bearish' ? 'border-bearish/50 text-bearish bg-bearish/5' : 'border-neutral/50 text-neutral bg-neutral/5'}`}>
+                        <Target size={18} />
+                        <span className="font-bold">{sentiment?.overall_sentiment_label}</span>
+                    </div>
+                    </div>
                 </div>
             </div>
 
             {/* Left Area: Chart */}
             <div className="lg:col-span-2 space-y-6">
-                <div className="glass p-6 rounded-3xl h-[400px] flex flex-col relative overflow-hidden group">
+                <div className="glass p-6 rounded-3xl h-[450px] flex flex-col relative overflow-hidden group">
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-accent/5 rounded-full blur-[100px] pointer-events-none"></div>
-                    <h3 className="font-semibold text-white mb-4 z-10">1-Month Price Trend</h3>
+                    
+                    <div className="flex justify-between items-center mb-4 z-10">
+                        <h3 className="font-semibold text-white flex items-center gap-2">
+                            <Activity size={18} className="text-accent"/> 
+                            Live Price Action
+                        </h3>
+                        
+                        <div className="flex bg-white/5 p-1 rounded-lg border border-white/10">
+                            {['1D', '5D', '1M'].map(tf => (
+                                <button 
+                                    key={tf}
+                                    onClick={() => setTimeframe(tf)}
+                                    className={`px-3 py-1 text-xs font-bold rounded-md transition-all ${timeframe === tf ? 'bg-accent/20 text-accent' : 'text-neutral hover:text-white'}`}
+                                >
+                                    {tf}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
                     <div className="flex-1 w-full z-10 h-full">
                         <TradingViewChart data={stock.history || []} />
                     </div>

@@ -7,14 +7,15 @@ from services.symbol_resolver import resolve_yahoo_symbol
 # Simple in-memory cache
 _stock_cache = {}
 _cache_lock = threading.Lock()
-CACHE_TTL = 60  # Cache for 60 seconds
+CACHE_TTL = 5  # Cache for 5 seconds for live polling
 
-def get_real_time_stock(symbol: str) -> dict:
+def get_real_time_stock(symbol: str, timeframe: str = "1M") -> dict:
     original_symbol = symbol
     yahoo_symbol = resolve_yahoo_symbol(symbol)
+    cache_key = f"{yahoo_symbol}_{timeframe}"
     
     with _cache_lock:
-        cached = _stock_cache.get(yahoo_symbol)
+        cached = _stock_cache.get(cache_key)
         if cached and time.time() - cached['timestamp'] < CACHE_TTL:
             return cached['data']
             
@@ -56,19 +57,29 @@ def get_real_time_stock(symbol: str) -> dict:
         if yahoo_symbol.endswith('.NS') or yahoo_symbol.endswith('.BO') or exchange == 'NSI':
             currency = 'INR'
         
-        # Get historical OHLC for chart (1mo for better candlestick rendering)
-        hist_data = ticker.history(period="1mo")
+        # Get historical OHLC for chart
+        if timeframe == '1D':
+            hist_data = ticker.history(period="1d", interval="1m")
+        elif timeframe == '5D':
+            hist_data = ticker.history(period="5d", interval="15m")
+        else: # 1M
+            hist_data = ticker.history(period="1mo", interval="1d")
+
         history = []
         for index, row in hist_data.iterrows():
+            if timeframe in ['1D', '5D']:
+                t_val = int(index.timestamp()) # UNIX timestamp (seconds) for TradingView intraday
+            else:
+                t_val = index.strftime("%Y-%m-%d") # string for daily
+
             history.append({
-                "date": index.strftime("%Y-%m-%d"),
+                "time": t_val,
                 "open": float(row['Open']),
                 "high": float(row['High']),
                 "low": float(row['Low']),
                 "close": float(row['Close']),
                 "volume": int(row['Volume'])
             })
-
             
         result = {
             "symbol": original_symbol,
@@ -91,7 +102,7 @@ def get_real_time_stock(symbol: str) -> dict:
         }
         
         with _cache_lock:
-            _stock_cache[yahoo_symbol] = {
+            _stock_cache[cache_key] = {
                 'timestamp': time.time(),
                 'data': result
             }
