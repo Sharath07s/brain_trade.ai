@@ -35,3 +35,9 @@ export const getMarketIndices = async () => {
   if (!res.ok) throw new Error("Failed to fetch market indices");
   return res.json();
 };
+
+export const getSocialFeed = async (symbol: string) => {
+  const res = await fetch(`${API_BASE}/social/social-feed/${symbol}`);
+  if (!res.ok) throw new Error("Failed to fetch social feed");
+  return res.json();
+};

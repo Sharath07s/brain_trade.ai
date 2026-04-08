@@ -2,21 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AlertTriangle, ShieldCheck } from 'lucide-react';
 
-const DisclaimerModal = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    // Check if the user has already accepted the disclaimer
-    const hasAccepted = localStorage.getItem('disclaimerAccepted');
-    if (!hasAccepted) {
-      setIsOpen(true);
-    }
-  }, []);
-
-  const handleAccept = () => {
-    localStorage.setItem('disclaimerAccepted', 'true');
-    setIsOpen(false);
-  };
+const DisclaimerModal = ({ isOpen, onAccept, onCancel }: { isOpen: boolean, onAccept: () => void, onCancel: () => void }) => {
 
   return (
     <AnimatePresence>
@@ -57,24 +43,35 @@ const DisclaimerModal = () => {
                 {/* Body Content */}
                 <div className="bg-[#161b22] px-5 py-6 rounded-2xl border border-white/5 space-y-4 shadow-inner">
                   <p className="text-gray-300 leading-relaxed text-[15px] sm:text-base">
-                    <span className="font-semibold text-white">⚠️ Disclaimer:</span> All stock prices, charts, and AI predictions on this website are for informational purposes only.
+                    The Brain Trade Engine provides AI-generated insights, signals, and analysis based on market data.
                   </p>
                   <p className="text-gray-300 leading-relaxed text-[15px] sm:text-base">
-                    Predictions are based on factors such as historical price trends, trading volume, recent news, social sentiment, and market indicators. <strong className="text-white">This website does not provide financial advice or guarantee investment performance.</strong>
+                    These insights are for informational and educational purposes only and should <strong className="text-white">NOT</strong> be considered as financial advice, investment recommendations, or trading guarantees.
                   </p>
                   <p className="text-gray-300 leading-relaxed text-[15px] sm:text-base">
-                    Users are responsible for their own investment decisions and should consult a professional financial advisor before making any trades. By using this website, you acknowledge and accept that the predictions are <span className="text-orange-400 font-medium">probabilistic</span> and may not reflect actual market outcomes.
+                    Stock markets are subject to high risk and volatility. You are solely responsible for your investment decisions and any resulting profits or losses.
+                  </p>
+                  <div className="text-gray-300 leading-relaxed text-[15px] sm:text-base">
+                    <span className="font-semibold text-white">By proceeding, you acknowledge that:</span>
+                    <ul className="list-none mt-2 space-y-1.5 ml-1">
+                      <li className="flex items-start gap-2"><span className="text-orange-400 mt-0.5">•</span> You understand the risks involved in trading and investing</li>
+                      <li className="flex items-start gap-2"><span className="text-orange-400 mt-0.5">•</span> You will not rely solely on this tool for making financial decisions</li>
+                      <li className="flex items-start gap-2"><span className="text-orange-400 mt-0.5">•</span> BrainTrade.AI is not liable for any financial losses</li>
+                    </ul>
+                  </div>
+                  <p className="text-orange-300 font-semibold text-[15px] sm:text-base pt-2">
+                    Please trade responsibly.
                   </p>
                 </div>
 
                 {/* Footer / Actions */}
                 <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-                  <a href="#" className="hidden sm:block text-sm text-gray-400 hover:text-white transition-colors underline decoration-gray-600 underline-offset-4">
-                    Read full disclaimer
-                  </a>
+                  <button onClick={onCancel} className="hidden sm:block text-sm text-gray-400 hover:text-white transition-colors underline decoration-gray-600 underline-offset-4">
+                    Cancel & Go Back
+                  </button>
                   
                   <button
-                    onClick={handleAccept}
+                    onClick={onAccept}
                     className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3.5 bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-400 hover:to-amber-500 text-white font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(249,115,22,0.3)] hover:shadow-[0_0_25px_rgba(249,115,22,0.5)] transform hover:-translate-y-0.5"
                   >
                     <ShieldCheck className="w-5 h-5" />
@@ -82,9 +79,9 @@ const DisclaimerModal = () => {
                   </button>
                   
                   {/* Mobile link visibility */}
-                  <a href="#" className="sm:hidden text-sm text-gray-500 hover:text-white transition-colors mt-2">
-                    Read full disclaimer
-                  </a>
+                  <button onClick={onCancel} className="sm:hidden text-sm text-gray-500 hover:text-white transition-colors mt-2">
+                    Cancel & Go Back
+                  </button>
                 </div>
               </div>
             </motion.div>

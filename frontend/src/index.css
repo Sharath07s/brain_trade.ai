@@ -15,3 +15,80 @@
     @apply bg-panel/70 backdrop-blur-md border border-white/5 shadow-xl;
   }
 }
+
+/* ── BrainTrade Engine Logo Aura ── */
+@keyframes aura-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 0.15;
+  }
+}
+
+@keyframes aura-ring-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.bt-engine-logo-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+}
+
+/* Soft diffused purple glow behind logo */
+.bt-engine-logo-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 16px;
+  background: radial-gradient(circle, #A855F7 0%, #7C3AED 60%, transparent 80%);
+  opacity: 0.45;
+  animation: aura-pulse 2.5s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Subtle rotating gradient ring */
+.bt-engine-logo-wrap::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 14px;
+  background: conic-gradient(from 0deg, transparent 0%, #A855F7 25%, transparent 50%, #7C3AED 75%, transparent 100%);
+  opacity: 0;
+  animation: aura-ring-rotate 4s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity 0.3s ease;
+}
+
+.bt-engine-logo-wrap:hover::after {
+  opacity: 0.3;
+}
+
+.bt-engine-logo-wrap:hover::before {
+  opacity: 0.65;
+}
+
+.bt-engine-logo-wrap:hover .bt-engine-logo {
+  transform: scale(1.05);
+}
+
+.bt-engine-logo {
+  position: relative;
+  z-index: 1;
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.4));
+}

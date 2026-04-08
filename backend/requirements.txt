@@ -16,3 +16,7 @@ pandas
 numpy
 textblob
 vaderSentiment
+
+praw
+groq
+

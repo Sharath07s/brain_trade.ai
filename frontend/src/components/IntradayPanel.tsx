@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Activity, Clock, TrendingUp, TrendingDown, RefreshCcw, ChevronDown } from 'lucide-react';
+import { Activity, Clock, TrendingUp, TrendingDown, RefreshCcw, ChevronDown, Brain } from 'lucide-react';
 import { getMarketIndices, getStock } from '../services/api';
 import TradingViewChart from './TradingViewChart';
+import BrainTradeEngineModal from './BrainTradeEngineModal';
+
+import DisclaimerModal from './DisclaimerModal';
 
 const INDICES_CONFIG = [
   { id: 'NIFTY 50', symbol: '^NSEI' },
@@ -13,6 +16,8 @@ const INDICES_CONFIG = [
 
 const IntradayPanel = () => {
     const [isExpanded, setIsExpanded] = useState(false);
+    const [isEngineModalOpen, setIsEngineModalOpen] = useState(false);
+    const [isDisclaimerOpen, setIsDisclaimerOpen] = useState(false);
     const [indices, setIndices] = useState<any[]>([]);
     
     // View state
@@ -208,21 +213,33 @@ const IntradayPanel = () => {
                             </div>
                         </div>
 
-                        {/* Intraday Timeframes */}
-                        <div className="flex p-1 bg-[#161b22] border border-white/10 rounded-lg">
-                            {['1m', '5m', '15m'].map((tf) => (
-                                <button
-                                    key={tf}
-                                    onClick={() => setTimeframe(tf)}
-                                    className={`px-4 py-1.5 rounded-md text-sm font-semibold transition-all ${
-                                        timeframe === tf 
-                                            ? 'bg-[#21262d] text-white shadow-sm' 
-                                            : 'text-gray-400 hover:text-white hover:bg-white/5'
-                                    }`}
-                                >
-                                    {tf}
-                                </button>
-                            ))}
+                        <div className="flex items-center gap-4">
+                            {/* Brain Engine Button */}
+                            <button 
+                                onClick={() => setIsDisclaimerOpen(true)}
+                                className="flex items-center gap-2 px-4 py-2 bg-blue-600/20 hover:bg-blue-600/40 border border-blue-500/30 rounded-lg transition-all text-blue-400 hover:text-blue-300 font-bold tracking-wide relative overflow-hidden group"
+                            >
+                                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/10 to-blue-500/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                                <Brain className="w-4 h-4" />
+                                <span className="text-sm">Brain Trade Engine</span>
+                            </button>
+
+                            {/* Intraday Timeframes */}
+                            <div className="flex p-1 bg-[#161b22] border border-white/10 rounded-lg">
+                                {['1m', '5m', '15m'].map((tf) => (
+                                    <button
+                                        key={tf}
+                                        onClick={() => setTimeframe(tf)}
+                                        className={`px-4 py-1.5 rounded-md text-sm font-semibold transition-all ${
+                                            timeframe === tf 
+                                                ? 'bg-[#21262d] text-white shadow-sm' 
+                                                : 'text-gray-400 hover:text-white hover:bg-white/5'
+                                        }`}
+                                    >
+                                        {tf}
+                                    </button>
+                                ))}
+                            </div>
                         </div>
                     </div>
 
@@ -250,6 +267,23 @@ const IntradayPanel = () => {
                     </div>
                 </motion.div>
             )}
+
+            <BrainTradeEngineModal 
+                isOpen={isEngineModalOpen}
+                onClose={() => setIsEngineModalOpen(false)}
+                symbol={selectedSymbol}
+                stockName={selectedName}
+                isMarketOpen={isMarketOpen}
+            />
+
+            <DisclaimerModal 
+                isOpen={isDisclaimerOpen}
+                onAccept={() => {
+                    setIsDisclaimerOpen(false);
+                    setIsEngineModalOpen(true);
+                }}
+                onCancel={() => setIsDisclaimerOpen(false)}
+            />
         </div>
     );
 };

@@ -5,7 +5,9 @@ import json
 from services.stock_data import get_real_time_stock
 from services.ai_engine import predict_stock_movement
 from services.news_data import fetch_and_analyze_news
-from services.social_data import fetch_social_sentiment
+from services.social_data import fetch_reddit_sentiment
+from services.macro_news import fetch_macro_news
+from services.smart_sentiment import analyze_macro_factors
 
 class ConnectionManager:
     def __init__(self):
@@ -57,8 +59,10 @@ class ConnectionManager:
                 # 2. Fetch dependencies
                 if not stock_data.get("error"):
                     news_data = fetch_and_analyze_news(symbol)
-                    social_data = fetch_social_sentiment(symbol)
-                    prediction = predict_stock_movement(symbol, stock_data, news_data, social_data)
+                    social_data = fetch_reddit_sentiment(symbol)
+                    macro_news = fetch_macro_news(symbol)
+                    macro_insights = analyze_macro_factors(macro_news, social_data)
+                    prediction = predict_stock_movement(symbol, stock_data, news_data, social_data, macro_insights)
                     
                     # Compute quick sentiment summary for UI
                     avg_sentiment_score = sum(n.get("sentiment_score", 0) for n in news_data) / max(len(news_data), 1)

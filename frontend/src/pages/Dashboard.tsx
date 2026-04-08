@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { getPrediction, getStock, getSentiment, getNews } from '../services/api';
+import { getPrediction, getStock, getSentiment, getNews, getSocialFeed } from '../services/api';
 import { motion, AnimatePresence } from 'framer-motion';
-import { TrendingUp, TrendingDown, Target, Brain, AlertCircle, RefreshCcw, Newspaper, Activity, Clock, Zap } from 'lucide-react';
+import { TrendingUp, TrendingDown, Target, Brain, AlertCircle, RefreshCcw, Newspaper, Activity, Clock, Zap, MessageCircle } from 'lucide-react';
 import TradingViewChart from '../components/TradingViewChart';
 import IntradayPanel from '../components/IntradayPanel';
 import { useGlobalContext } from '../context/GlobalContext';
@@ -48,6 +48,7 @@ const Dashboard = () => {
   const [stock, setStock] = useState<any>(null);
   const [sentiment, setSentiment] = useState<any>(null);
   const [news, setNews] = useState<any>(null);
+  const [socialFeed, setSocialFeed] = useState<any[]>([]);
   
   const [timeframe, setTimeframe] = useState('1M');
   const [isLiveMode, setIsLiveMode] = useState(false);
@@ -78,11 +79,12 @@ const Dashboard = () => {
     // Reset live data on new symbol load
     setLiveTickPrice(null);
     try {
-      const [predData, stockData, sentData, newsData] = await Promise.all([
+      const [predData, stockData, sentData, newsData, feedData] = await Promise.all([
         getPrediction(sym),
         getStock(sym, tf),
         getSentiment(sym),
-        getNews(sym)
+        getNews(sym),
+        getSocialFeed(sym).catch(() => ({ feed: [] }))
       ]);
       
       if (stockData.error) throw new Error(stockData.error);
@@ -91,6 +93,7 @@ const Dashboard = () => {
       setStock(stockData);
       setSentiment(sentData);
       setNews(newsData.news || []);
+      setSocialFeed(feedData.feed || []);
     } catch (err: any) {
       setError(err.message || "Failed to load data");
     } finally {
@@ -348,21 +351,32 @@ const Dashboard = () => {
                     </div>
                 </div>
                 
-                {/* News Section */}
+                {/* Mixed News + Social Feed */}
                 <div className="glass p-6 rounded-3xl">
-                    <h3 className="font-semibold text-white mb-4 flex items-center gap-2"><Newspaper size={18} className="text-accent"/> Recent News</h3>
+                    <h3 className="font-semibold text-white mb-4 flex items-center gap-2"><Newspaper size={18} className="text-accent"/> Recent Intel Feed</h3>
                     <div className="space-y-4">
-                    {news?.slice(0,3).map((item: any, i: number) => (
-                        <div key={i} className="group p-4 bg-white/5 hover:bg-white/10 border border-white/5 rounded-2xl transition-all cursor-pointer">
-                            <div className="flex justify-between items-start mb-2">
-                                <span className="text-xs text-neutral">{item.source}</span>
-                                <span className={`text-[10px] uppercase font-bold px-2 py-0.5 rounded-full ${item.sentiment_label === 'Positive' ? 'bg-bullish/20 text-bullish' : item.sentiment_label === 'Negative' ? 'bg-bearish/20 text-bearish' : 'bg-neutral/20 text-neutral'}`}>
-                                {item.sentiment_label}
-                                </span>
-                            </div>
-                            <p className="text-sm text-white group-hover:text-accent transition-colors">{item.title}</p>
-                        </div>
-                    ))}
+                    {(socialFeed.length > 0 ? socialFeed : (news || [])).slice(0,5).map((item: any, i: number) => {
+                        const isReddit = item.type === 'reddit';
+                        const sentLabel = item.sentiment_label || (item.sentiment_score > 0.1 ? 'Positive' : item.sentiment_score < -0.1 ? 'Negative' : 'Neutral');
+                        return (
+                            <a key={i} href={item.url !== '#' ? item.url : undefined} target="_blank" rel="noreferrer" className="block group p-4 bg-white/5 hover:bg-white/10 border border-white/5 rounded-2xl transition-all cursor-pointer">
+                                <div className="flex justify-between items-start mb-2">
+                                    <div className="flex items-center gap-2">
+                                        {isReddit ? (
+                                            <MessageCircle size={14} className="text-orange-400" />
+                                        ) : (
+                                            <Newspaper size={14} className="text-blue-400" />
+                                        )}
+                                        <span className="text-xs text-neutral">{isReddit ? 'Reddit' : (item.source || 'News')}</span>
+                                    </div>
+                                    <span className={`text-[10px] uppercase font-bold px-2 py-0.5 rounded-full ${sentLabel === 'Positive' ? 'bg-bullish/20 text-bullish' : sentLabel === 'Negative' ? 'bg-bearish/20 text-bearish' : 'bg-neutral/20 text-neutral'}`}>
+                                        {sentLabel}
+                                    </span>
+                                </div>
+                                <p className="text-sm text-white group-hover:text-accent transition-colors line-clamp-2">{item.title}</p>
+                            </a>
+                        );
+                    })}
                     </div>
                 </div>
             </div>
@@ -399,8 +413,8 @@ const Dashboard = () => {
 
                 <div className="glass p-6 rounded-3xl relative overflow-hidden flex flex-col">
                     <div className="flex items-center gap-3 mb-6">
-                    <div className="p-2 bg-accent/20 rounded-lg">
-                        <Brain className="text-accent" size={24} />
+                    <div className="bt-engine-logo-wrap">
+                        <img src="/logo.png" alt="BrainTrade Engine" className="bt-engine-logo" />
                     </div>
                     <h3 className="font-bold text-white text-xl">BrainTrade Engine</h3>
                     </div>

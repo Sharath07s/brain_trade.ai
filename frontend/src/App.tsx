@@ -14,7 +14,6 @@ import Settings from './pages/Settings';
 function App() {
   return (
     <GlobalProvider>
-      <DisclaimerModal />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, LineChart, Newspaper, Bell, Settings, PieChart } from 'lucide-react';
+import { Home, LineChart, Newspaper, Bell, Settings } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { NavLink } from 'react-router-dom';
 
@@ -7,9 +7,7 @@ const Sidebar = () => {
     return (
         <aside className="w-20 lg:w-64 h-screen glass border-r border-white/5 fixed left-0 top-0 flex flex-col pt-6 z-40 transition-all duration-300 hidden md:flex">
             <div className="flex items-center justify-center lg:justify-start lg:px-8 mb-10">
-                <div className="w-10 h-10 rounded-xl bg-accent flex items-center justify-center shadow-[0_0_20px_rgba(0,240,255,0.4)]">
-                    <PieChart className="text-panel" size={24} />
-                </div>
+                <img src="/logo.png" alt="BrainTrade.AI" className="w-10 h-10 rounded-xl object-contain drop-shadow-[0_0_12px_rgba(168,85,247,0.5)]" />
                 <h1 className="ml-3 font-bold text-xl text-white hidden lg:block tracking-wide">BrainTrade<span className="text-accent">.AI</span></h1>
             </div>
 

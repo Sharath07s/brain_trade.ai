@@ -1,6 +1,6 @@
 import random
 
-def predict_stock_movement(symbol: str, price_data: dict, news_data: list, social_data: list) -> dict:
+def predict_stock_movement(symbol: str, price_data: dict, news_data: list, social_data: list, macro_insights: dict = None) -> dict:
     """
     Simulates an XGBoost & FinBERT prediction engine.
     Fully loading FinBERT & XGBoost takes significant memory. We simulate the feature extraction
@@ -19,9 +19,17 @@ def predict_stock_movement(symbol: str, price_data: dict, news_data: list, socia
             last_close = hist[-1]["close"]
             price_trend = (last_close - first_close) / first_close
             
+    # Macro Insights
+    macro_score = 0.0
+    macro_catalysts = []
+    if macro_insights:
+        macro_score = macro_insights.get("macro_sentiment_score", 0.0)
+        macro_catalysts = macro_insights.get("macro_catalysts", [])
+
     # 2. Mock Prediction (Simulating XGBoost)
     # The more positive the engineered features, the higher the UP probability
-    score = (avg_news_sentiment * 0.4) + (avg_social_sentiment * 0.3) + (price_trend * 10 * 0.3)
+    # Now adding heavy weight to macro_score
+    score = (avg_news_sentiment * 0.2) + (avg_social_sentiment * 0.2) + (price_trend * 10 * 0.2) + (macro_score * 0.4)
     
     # Base confidence around 60-95%
     confidence = min(max(0.55 + abs(score), 0.55), 0.98)
@@ -39,9 +47,15 @@ def predict_stock_movement(symbol: str, price_data: dict, news_data: list, socia
         "News Sentiment": f"+{round(avg_news_sentiment, 2)}" if avg_news_sentiment > 0 else f"{round(avg_news_sentiment, 2)}",
         "Social Sentiment": f"+{round(avg_social_sentiment, 2)}" if avg_social_sentiment > 0 else f"{round(avg_social_sentiment, 2)}",
         "Price Trend": f"+{round(price_trend*100, 2)}%" if price_trend > 0 else f"{round(price_trend*100, 2)}%",
+        "Macro Environment": f"+{round(macro_score, 2)}" if macro_score > 0 else f"{round(macro_score, 2)}"
     }
     
     explanations = []
+    if macro_score > 0.3:
+        explanations.append(f"Strong macro-economic tailwinds boost long-term viability (+{round(macro_score, 2)} macro impact).")
+    elif macro_score < -0.3:
+        explanations.append(f"Significant macro headwinds are suppressing growth potential ({round(macro_score, 2)} macro impact).")
+
     if avg_news_sentiment > 0.1:
         explanations.append(f"Positive news coverage contributes heavily to upward momentum (+{round(avg_news_sentiment, 2)} impact).")
     elif avg_news_sentiment < -0.1:
@@ -58,13 +72,34 @@ def predict_stock_movement(symbol: str, price_data: dict, news_data: list, socia
         explanations.append(f"Recent downtrend of {round(price_trend*100, 2)}% brings technical pressure.")
         
     if not explanations:
-        explanations.append("Mixed signals across technicals and sentiment resulting in low momentum.")
+        explanations.append("Mixed signals across technicals, macro, and sentiment resulting in low momentum.")
+
+    if score > 0.15:
+        trade_signal = "STRONG BUY"
+    elif score > threshold:
+        trade_signal = "BUY"
+    elif score < -0.15:
+        trade_signal = "STRONG SELL"
+    elif score < -threshold:
+        trade_signal = "SELL"
+    else:
+        trade_signal = "HOLD"
+        
+    # Risk Profile calculation
+    risk_score = "MEDIUM"
+    if abs(score) < 0.05 and abs(price_trend) > 0.05:
+         risk_score = "HIGH" # Volatile but neutral overall
+    elif abs(score) > 0.2:
+         risk_score = "LOW" # Clear direction
 
     return {
         "symbol": symbol,
         "prediction": prediction,
+        "trade_signal": trade_signal,
+        "risk_profile": risk_score,
         "confidence": round(confidence * 100, 1),
         "score_internal": round(score, 3),
         "shap_features": reasons,
-        "explanations": explanations
+        "explanations": explanations,
+        "macro_factors": macro_catalysts
     }
