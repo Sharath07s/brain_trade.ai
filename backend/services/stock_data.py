@@ -2,7 +2,12 @@ import yfinance as yf
 from datetime import datetime
 import threading
 import time
+import os
+import requests
+from dotenv import load_dotenv
 from services.symbol_resolver import resolve_yahoo_symbol
+
+load_dotenv()
 
 # Simple in-memory cache
 _stock_cache = {}
@@ -121,14 +126,23 @@ def get_real_time_stock(symbol: str, timeframe: str = "1M") -> dict:
         traceback.print_exc()
         return {"error": str(e)}
 
-def get_market_indices() -> list:
-    """Fetches real-time summary for core Indian Indices."""
+def get_market_indices() -> dict:
+    """Fetches real-time summary for core Indian Indices and evaluates market status."""
     indices = [
         {"symbol": "^NSEI", "name": "NIFTY 50"},
         {"symbol": "^BSESN", "name": "SENSEX"},
-        {"symbol": "^NSEBANK", "name": "BANKNIFTY"},
-        {"symbol": "BSE-BANK.BO", "name": "BANKEX"}
+        {"symbol": "^NSEBANK", "name": "BANK NIFTY"},
+        {"symbol": "^CNXIT", "name": "NIFTY IT"},
+        {"symbol": "^CNXAUTO", "name": "NIFTY AUTO"},
+        {"symbol": "^CNXFMCG", "name": "NIFTY FMCG"}
     ]
+    
+    # Determine if market is currently open (roughly) in IST (UTC+5:30)
+    # Market hours: 03:45 UTC to 10:00 UTC, Mon-Fri
+    now_utc = datetime.utcnow()
+    is_weekday = now_utc.weekday() < 5
+    current_time_minutes = now_utc.hour * 60 + now_utc.minute
+    market_open = is_weekday and (225 <= current_time_minutes <= 600)
     
     cache_key = "market_indices_batch"
     with _cache_lock:
@@ -163,9 +177,138 @@ def get_market_indices() -> list:
         with _cache_lock:
             _stock_cache[cache_key] = {
                 'timestamp': time.time(),
-                'data': results
+                'data': {
+                    "market_status": "OPEN" if market_open else "CLOSED",
+                    "indices": results
+                }
             }
-        return results
+        return {
+            "market_status": "OPEN" if market_open else "CLOSED",
+            "indices": results
+        }
     except Exception as e:
         print(f"Batch index error: {e}")
-        return []
+        return {"market_status": "UNKNOWN", "indices": []}
+
+def get_indian_growth_stocks() -> dict:
+    """Calculates top Indian growth stocks natively using a pre-defined liquid universe."""
+    
+    INDIAN_UNIVERSE = [
+        "RELIANCE.NS", "TCS.NS", "HDFCBANK.NS", "ICICIBANK.NS", "BHARTIARTL.NS",
+        "INFY.NS", "ITC.NS", "SBIN.NS", "L&TFH.NS", "BAJFINANCE.NS",
+        "ADANIENT.NS", "M&M.NS", "TATAMOTORS.NS", "SUNPHARMA.NS", "NTPC.NS",
+        "KOTAKBANK.NS", "ZOMATO.NS", "TRENT.NS", "HAL.NS", "JIOFIN.NS"
+    ]
+    
+    cache_key = "indian_growth_stocks"
+    with _cache_lock:
+        cached = _stock_cache.get(cache_key)
+        if cached and time.time() - cached['timestamp'] < 15: # 15s cache
+            return cached['data']
+            
+    try:
+        tickers = yf.Tickers(" ".join(INDIAN_UNIVERSE))
+        stock_data = []
+        
+        for sym in INDIAN_UNIVERSE:
+            try:
+                t = tickers.tickers[sym]
+                hist = t.history(period="1d")
+                if hist.empty:
+                    continue
+                current = float(hist['Close'].iloc[-1])
+                # In fast_info or fallback to open
+                try:
+                    prev_close = float(t.fast_info.get('previous_close', hist['Open'].iloc[0]))
+                except:
+                    prev_close = float(hist['Open'].iloc[0])
+                    
+                change = current - prev_close
+                change_percent = (change / prev_close) * 100
+                vol = int(hist['Volume'].iloc[-1] if 'Volume' in hist else 0)
+                
+                # Default AI tags
+                trend = "neutral"
+                tag = ""
+                if change_percent > 3:
+                    trend = "bullish"
+                    tag = "Breakout"
+                elif change_percent > 1:
+                    trend = "bullish"
+                    tag = "High Growth"
+                elif change_percent < -2:
+                    trend = "bearish"
+                    tag = "Oversold?"
+                else:
+                    trend = "neutral"
+                    tag = "Stable"
+                    
+                stock_data.append({
+                    "sym": sym.split('.')[0], # Remove .NS
+                    "name": sym.split('.')[0] + " Ltd", # Fallback name
+                    "price": current,
+                    "change": change,
+                    "change_amount": change,
+                    "change_percentage": change_percent,
+                    "vol": 'High' if vol > 5000000 else 'Medium',
+                    "trend": trend,
+                    "tag": tag
+                })
+            except Exception as e:
+                print(f"Skipping {sym}: {e}")
+                
+        # Sort by % change descending to find 'Top Growth'
+        stock_data.sort(key=lambda x: x['change_percentage'], reverse=True)
+        top_growth = stock_data[:8]
+        
+        result = {
+            "top_growth": top_growth,
+            "all_evaluated": len(stock_data)
+        }
+        
+        with _cache_lock:
+            _stock_cache[cache_key] = {
+                'timestamp': time.time(),
+                'data': result
+            }
+        return result
+    except Exception as e:
+        print(f"Indian growth error: {e}")
+        return {"error": str(e)}
+
+def get_market_movers() -> dict:
+    """Fetches top gainers, losers, and most active using Alpha Vantage."""
+    api_key = os.getenv("ALPHA_VANTAGE_API_KEY")
+    if not api_key:
+        return {"error": "Alpha Vantage API key not found"}
+        
+    cache_key = "market_movers"
+    with _cache_lock:
+        cached = _stock_cache.get(cache_key)
+        # Cache for 5 minutes since this endpoint doesn't need to be highly real-time
+        if cached and time.time() - cached['timestamp'] < 300:
+            return cached['data']
+            
+    url = f"https://www.alphavantage.co/query?function=TOP_GAINERS_LOSERS&apikey={api_key}"
+    try:
+        response = requests.get(url)
+        data = response.json()
+        
+        if "Information" in data and "rate limit" in data["Information"].lower():
+            return {"error": "Alpha Vantage rate limit reached"}
+            
+        result = {
+            "top_gainers": data.get("top_gainers", []),
+            "top_losers": data.get("top_losers", []),
+            "most_actively_traded": data.get("most_actively_traded", [])
+        }
+        
+        with _cache_lock:
+            _stock_cache[cache_key] = {
+                'timestamp': time.time(),
+                'data': result
+            }
+        return result
+    except Exception as e:
+        print(f"Market Movers error: {e}")
+        return {"error": str(e)}

@@ -36,6 +36,12 @@ export const getMarketIndices = async () => {
   return res.json();
 };
 
+export const getIndianGrowthStocks = async () => {
+  const res = await fetch(`${API_BASE}/stock/indian-growth`);
+  if (!res.ok) throw new Error("Failed to fetch top indian growth stocks");
+  return res.json();
+};
+
 export const getSocialFeed = async (symbol: string) => {
   const res = await fetch(`${API_BASE}/social/social-feed/${symbol}`);
   if (!res.ok) throw new Error("Failed to fetch social feed");

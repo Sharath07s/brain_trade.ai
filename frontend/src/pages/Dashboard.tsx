@@ -414,7 +414,7 @@ const Dashboard = () => {
                 <div className="glass p-6 rounded-3xl relative overflow-hidden flex flex-col">
                     <div className="flex items-center gap-3 mb-6">
                     <div className="bt-engine-logo-wrap">
-                        <img src="/logo.png" alt="BrainTrade Engine" className="bt-engine-logo" />
+                        <img src="/engine-logo.svg" alt="BrainTrade Engine" className="bt-engine-logo" />
                     </div>
                     <h3 className="font-bold text-white text-xl">BrainTrade Engine</h3>
                     </div>
