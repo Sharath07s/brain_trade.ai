@@ -63,33 +63,43 @@ def fetch_reddit_sentiment(symbol: str) -> list:
 
     # Fallback / Mock logic natively integrated for testing without API keys
     if not analyzed_social:
-        mock_posts = [
-            {"platform": "reddit", "text": f"Just bought 100 shares of {symbol}, holding to the moon! 🚀🚀", "sentiment_score": 0.8},
-            {"platform": "reddit", "text": f"I don't know, {symbol} looks overvalued at this price point.", "sentiment_score": -0.4},
-            {"platform": "reddit", "text": f"{symbol} earnings report was fairly standard today.", "sentiment_score": 0.0},
-            {"platform": "reddit", "text": f"Selling {symbol} before the dip.", "sentiment_score": -0.6},
-            {"platform": "reddit", "text": f"Cannot wait for {symbol} to break resistance!", "sentiment_score": 0.7},
+        # Create symbol-aware mock Reddit posts
+        symbol_hash = sum(ord(c) for c in symbol)
+        
+        mock_templates = [
+            {"text": f"Just bought 100 shares of {symbol}, holding to the moon! 🚀🚀", "base_score": 0.8},
+            {"text": f"I don't know, {symbol} looks overvalued at this price point.", "base_score": -0.4},
+            {"text": f"{symbol} earnings report was fairly standard today.", "base_score": 0.0},
+            {"text": f"Selling {symbol} before the dip.", "base_score": -0.6},
+            {"text": f"Cannot wait for {symbol} to break resistance!", "base_score": 0.7},
+            {"text": f"Technical analysis on {symbol} shows a clear breakout pattern.", "base_score": 0.5},
+            {"text": f"Market makers seem to be manipulating {symbol} volume today.", "base_score": -0.2}
         ]
         
-        for item in mock_posts:
-            # We skip Textblob for mocks as they already have scores
-            score = item.get("sentiment_score", 0)
+        # Select and vary scores based on symbol
+        for i in range(5):
+            idx = (symbol_hash + i) % len(mock_templates)
+            template = mock_templates[idx]
             
-            if score > 0.1:
+            # Add some variability based on symbol and index
+            varied_score = template["base_score"] + ((symbol_hash % 10) - 5) / 50.0
+            varied_score = max(-1.0, min(1.0, varied_score))
+            
+            if varied_score > 0.1:
                 label = "Positive"
-            elif score < -0.1:
+            elif varied_score < -0.1:
                 label = "Negative"
             else:
                 label = "Neutral"
                 
             analyzed_social.append({
-                "platform": item["platform"],
-                "title": item["text"][:30] + "...",
-                "text": item["text"],
-                "sentiment_score": round(score, 2),
+                "platform": "reddit",
+                "title": template["text"][:30] + "...",
+                "text": template["text"],
+                "sentiment_score": round(varied_score, 2),
                 "sentiment_label": label,
-                "upvote_ratio": 0.9,
-                "score": 145,
+                "upvote_ratio": 0.85 + (i * 0.02),
+                "score": 100 + (i * 10) + (symbol_hash % 50),
                 "url": "#",
                 "created_at": datetime.utcnow().isoformat()
             })

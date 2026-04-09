@@ -80,11 +80,6 @@ Keep the catalysts under 100 characters each.
 def _mock_macro_analysis(news: list, reddit: list) -> dict:
     """Fallback if Groq isn't configured."""
     score = 0.0
-    catalysts = [
-        "Uncertainty in broader tech sector policies.",
-        "Retail investor sentiment holding steady.",
-        "Awaiting next quarter earnings reports."
-    ]
     
     # Very basic heuristic from mock data
     if news:
@@ -94,20 +89,47 @@ def _mock_macro_analysis(news: list, reddit: list) -> dict:
         score += sum(r.get("sentiment_score", 0) for r in reddit[:5]) / 5.0
         
     score = max(-1.0, min(1.0, score))
-    
-    # Adjust mock catalysts based on score
-    if score > 0.2:
-        catalysts = [
-            "Strong bullish retail momentum identified.",
-            "Favorable regulatory shifts anticipated.",
-            "Solid institutional backing in recent news."
-        ]
-    elif score < -0.2:
-        catalysts = [
+
+    # Pool of varied catalysts
+    catalyst_pool = {
+        "bullish": [
+            "Strong bullish retail momentum identified in social feeds.",
+            "Favorable regulatory shifts anticipated in the coming quarter.",
+            "Solid institutional backing observed in recent trade volume.",
+            "Technological alpha signals approaching a breakout zone.",
+            "Decreasing volatility in the sector improves risk appetite."
+        ],
+        "bearish": [
             "Bearish overhang from retail selling pressure.",
-            "Macro headwinds impacting sector valuation.",
-            "Negative sentiment cascading through social feeds."
+            "Macro headwinds impacting sector valuation and growth.",
+            "Negative sentiment cascading through major social social channels.",
+            "Institutional outflows detected in recent high-volume blocks.",
+            "Regulatory uncertainty remains a primary concern for investors."
+        ],
+        "neutral": [
+            "Uncertainty in broader tech sector policies remains high.",
+            "Retail investor sentiment holding steady without clear bias.",
+            "Market awaiting next quarter earnings reports for direction.",
+            "Consolidation phase detected with low directional momentum.",
+            "Equilibrium between buyers and sellers suggests short-term stability."
         ]
+    }
+    
+    # Determine bias
+    bias = "neutral"
+    if score > 0.15: bias = "bullish"
+    elif score < -0.15: bias = "bearish"
+    
+    # Select catalysts based on a simple hash to keep it unique per symbol
+    # We can't access symbol directly here as it's not passed, but we can use the first item in news/reddit if available
+    seed = sum(ord(c) for c in (str(news[0].get('title', '')) if news else "default"))
+    
+    selected_pool = catalyst_pool[bias]
+    catalysts = [
+        selected_pool[(seed) % len(selected_pool)],
+        selected_pool[(seed + 1) % len(selected_pool)],
+        selected_pool[(seed + 2) % len(selected_pool)]
+    ]
         
     return {
         "macro_sentiment_score": score,
