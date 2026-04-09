@@ -56,8 +56,8 @@ const IntradayPanel = () => {
         const fetchIndices = async () => {
             try {
                 const data = await getMarketIndices();
-                if (data && data.length > 0) {
-                    setIndices(data);
+                if (data && data.indices && data.indices.length > 0) {
+                    setIndices(data.indices);
                 }
             } catch (err) {
                 console.error("Failed to load indices", err);
