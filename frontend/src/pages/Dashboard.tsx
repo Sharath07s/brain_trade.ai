@@ -80,22 +80,23 @@ const Dashboard = () => {
     setLiveTickPrice(null);
     try {
       const [predData, stockData, sentData, newsData, feedData] = await Promise.all([
-        getPrediction(sym),
-        getStock(sym, tf),
-        getSentiment(sym),
-        getNews(sym),
-        getSocialFeed(sym).catch(() => ({ feed: [] }))
+        getPrediction(sym).catch((e) => { console.error('Prediction error:', e); return null; }),
+        getStock(sym, tf).catch((e) => { console.error('Stock API error:', e); return { error: e.message }; }),
+        getSentiment(sym).catch((e) => { console.error('Sentiment error:', e); return null; }),
+        getNews(sym).catch((e) => { console.error('News error:', e); return { news: [] }; }),
+        getSocialFeed(sym).catch((e) => { console.error('Social error:', e); return { feed: [] }; })
       ]);
       
-      if (stockData.error) throw new Error(stockData.error);
+      if (!stockData || stockData.error) throw new Error(stockData?.error || "Failed to interact with backend data source");
       
       setPrediction(predData);
       setStock(stockData);
       setSentiment(sentData);
-      setNews(newsData.news || []);
-      setSocialFeed(feedData.feed || []);
+      setNews(newsData?.news || []);
+      setSocialFeed(feedData?.feed || []);
     } catch (err: any) {
-      setError(err.message || "Failed to load data");
+      console.error("Dashboard Fetch Error:", err);
+      setError(err.message || "Failed to load data. Ensure backend is running.");
     } finally {
       setLoading(false);
     }
@@ -231,10 +232,22 @@ const Dashboard = () => {
         ) : error ? (
             <motion.div 
             key="error"
-            className="glass border-red-500/50 p-6 rounded-2xl flex items-center gap-4 text-red-400 w-full"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="w-full relative flex flex-col items-center justify-center p-12 glass border-red-500/20 rounded-3xl min-h-[60vh] shadow-[0_0_40px_rgba(239,68,68,0.05)]"
             >
-            <AlertCircle />
-            <p>{error}</p>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-red-500/10 rounded-full blur-[80px] pointer-events-none"></div>
+            <div className="bg-red-500/10 p-4 rounded-full mb-6 border border-red-500/20">
+                <AlertCircle className="w-12 h-12 text-red-500 drop-shadow-[0_0_15px_rgba(239,68,68,0.6)]" />
+            </div>
+            <h2 className="text-3xl font-black text-white mb-2 tracking-tight">System Interruption</h2>
+            <p className="text-red-400 mb-8 max-w-md text-center text-sm font-medium">{error}</p>
+            <button 
+                onClick={() => fetchData(routeSymbol || symbol || 'TSLA', timeframe)} 
+                className="px-6 py-3 bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 rounded-xl text-white font-bold transition-all duration-300 flex items-center gap-2 hover:shadow-[0_0_20px_rgba(239,68,68,0.2)] hover:-translate-y-0.5"
+            >
+                <RefreshCcw size={18} className="text-red-400" /> Reboot Connection Stream
+            </button>
             </motion.div>
         ) : (
             <motion.div

@@ -26,23 +26,28 @@ def get_real_time_stock(symbol: str, timeframe: str = "1M") -> dict:
             
     try:
         ticker = yf.Ticker(yahoo_symbol)
-        # Try to get fast history to check if symbol is valid
-        data = ticker.history(period="1d")
+        # Try to get fast history to check if symbol is valid (use 5d to ensure we get a valid day in case today is empty/holiday)
+        data = ticker.history(period="5d")
         
         if data.empty and not yahoo_symbol.endswith('.NS'):
             # Fallback for Indian stocks that missed the resolver
             yahoo_symbol = f"{symbol}.NS"
             ticker = yf.Ticker(yahoo_symbol)
-            data = ticker.history(period="1d")
+            data = ticker.history(period="5d")
 
         if data.empty:
             return {"error": "No data found for symbol. Please check the ticker."}
+            
+        import math
+        valid_data = data.dropna(subset=['Close'])
+        if valid_data.empty:
+            return {"error": "No valid pricing data available."}
         
-        current_price = float(data['Close'].iloc[-1])
-        volume = int(data['Volume'].iloc[-1])
-        open_price = float(data['Open'].iloc[-1])
-        high_price = float(data['High'].iloc[-1])
-        low_price = float(data['Low'].iloc[-1])
+        current_price = float(valid_data['Close'].iloc[-1])
+        volume = int(valid_data['Volume'].iloc[-1]) if 'Volume' in valid_data else 0
+        open_price = float(valid_data['Open'].iloc[-1])
+        high_price = float(valid_data['High'].iloc[-1])
+        low_price = float(valid_data['Low'].iloc[-1])
         
         info = ticker.fast_info if hasattr(ticker, 'fast_info') else {}
         ticker_info = ticker.info if hasattr(ticker, 'info') else {}
@@ -80,6 +85,9 @@ def get_real_time_stock(symbol: str, timeframe: str = "1M") -> dict:
 
         history = []
         for index, row in hist_data.iterrows():
+            if math.isnan(float(row.get('Close', float('nan')))):
+                continue
+                
             if 'm' in interval or 'h' in interval:
                 t_val = int(index.timestamp()) # UNIX timestamp (seconds) for TradingView intraday
             else:
@@ -91,7 +99,7 @@ def get_real_time_stock(symbol: str, timeframe: str = "1M") -> dict:
                 "high": float(row['High']),
                 "low": float(row['Low']),
                 "close": float(row['Close']),
-                "volume": int(row['Volume'])
+                "volume": int(row.get('Volume', 0))
             })
             
         result = {
