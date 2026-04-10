@@ -1,98 +1,66 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Zap, Activity, Filter, Globe, Building2, Brain, Clock, Newspaper, ShieldAlert, BarChart3, TrendingDown } from 'lucide-react';
-
-// --- RICH MOCK DATA FEED --- //
-const NEWS_FEED = [
-    {
-        id: 1,
-        headline: "TCS Reports Surprise Margin Expansion in Q3, Beating Street Estimates",
-        source: "Bloomberg Finance",
-        time: "12 mins ago",
-        sentiment: "Positive",
-        impact: "High",
-        category: "Earnings",
-        aiInsight: "Surprise margins hint at successful cost-optimization; expect immediate upward rerating across mid-cap IT sector peers.",
-        relatedSymbols: ["TCS", "INFY"]
-    },
-    {
-        id: 2,
-        headline: "Reliance Extends Strategic Partnership with Aramco for Advanced Chemicals Facility",
-        source: "Reuters",
-        time: "45 mins ago",
-        sentiment: "Positive",
-        impact: "Medium",
-        category: "Company",
-        aiInsight: "Long-term bullish driver for O2C margins; likely to support price holding above crucial 2900 resistance band.",
-        relatedSymbols: ["RELIANCE"]
-    },
-    {
-        id: 3,
-        headline: "Global Central Banks Signal Slower Rate Cuts Amid Stuck Inflation Data",
-        source: "Financial Times",
-        time: "1 hour ago",
-        sentiment: "Negative",
-        impact: "High",
-        category: "Global Policy",
-        aiInsight: "Hawkish macro shift directly pressures foreign inflows; expect sustained broad-market weakness and banking sector drag.",
-        relatedSymbols: ["NIFTY 50", "BANKNIFTY"]
-    },
-    {
-        id: 4,
-        headline: "HDFC Bank Deposit Growth Moderates; Management Highlights Tight Liquidity",
-        source: "CNBC TV18",
-        time: "2 hours ago",
-        sentiment: "Negative",
-        impact: "High",
-        category: "Economy",
-        aiInsight: "Structural liquidity constraints will compress net interest margins; short-to-medium term bearish catalyst.",
-        relatedSymbols: ["HDFCBANK", "ICICIBANK"]
-    },
-    {
-        id: 5,
-        headline: "EV Subsidy Extension Draft Circulated Among Select Automakers",
-        source: "Mint",
-        time: "3 hours ago",
-        sentiment: "Positive",
-        impact: "Medium",
-        category: "Policy",
-        aiInsight: "Policy tailwind for early EV adopters; Tata Motors remains technically primed for a breakout on confirmation.",
-        relatedSymbols: ["TATAMOTORS", "M&M"]
-    },
-    {
-        id: 6,
-        headline: "Adani Enterprises successfully concludes $1.5B international bond issuance",
-        source: "Economic Times",
-        time: "5 hours ago",
-        sentiment: "Neutral",
-        impact: "Low",
-        category: "Corporate Action",
-        aiInsight: "Reduces immediate refinancing risks; minimal impact on daily trading structure as issuance was fully priced in.",
-        relatedSymbols: ["ADANIENT"]
-    }
-];
+import { Search, Zap, Activity, Filter, Globe, Building2, Brain, Clock, Newspaper, ShieldAlert, BarChart3, TrendingDown, TrendingUp, RefreshCcw, Loader2 } from 'lucide-react';
+import { getGeneralNews } from '../services/api';
 
 const NewsSentimentDashboard = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [activeTab, setActiveTab] = useState<'All' | 'Positive' | 'Negative' | 'Neutral'>('All');
     const [highImpactOnly, setHighImpactOnly] = useState(false);
+    const [newsFeed, setNewsFeed] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    const fetchNews = async () => {
+        try {
+            setError(null);
+            const data = await getGeneralNews();
+            if (data && Array.isArray(data.news)) {
+                setNewsFeed(data.news);
+            }
+        } catch (err: any) {
+            console.error("News fetch error:", err);
+            setError("Failed to load market intelligence. Backend may be offline.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchNews();
+        // Auto-refresh every 60 seconds
+        const interval = setInterval(fetchNews, 60000);
+        return () => clearInterval(interval);
+    }, []);
+
+    // Compute overall market mood from fetched data
+    const overallMood = (() => {
+        if (newsFeed.length === 0) return 'Neutral';
+        const avgSentiment = newsFeed.reduce((sum, n) => sum + (n.sentiment_score || 0), 0) / newsFeed.length;
+        if (avgSentiment > 0.05) return 'Slightly Bullish';
+        if (avgSentiment < -0.05) return 'Slightly Bearish';
+        return 'Neutral';
+    })();
+
+    const topImpactHeadline = newsFeed.find(n => n.impact === 'High')?.title || newsFeed[0]?.title || 'Analyzing market signals...';
 
     // Apply Filters
-    const filteredNews = NEWS_FEED.filter(news => {
-        const matchesSearch = news.headline.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                              news.relatedSymbols.some(s => s.toLowerCase().includes(searchQuery.toLowerCase()));
+    const filteredNews = newsFeed.filter(news => {
+        const matchesSearch = news.title?.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                              (news.related_symbol || '').toLowerCase().includes(searchQuery.toLowerCase());
         
-        const matchesTab = activeTab === 'All' ? true : news.sentiment === activeTab;
+        const sentiment = news.sentiment_label || 'Neutral';
+        const matchesTab = activeTab === 'All' ? true : sentiment === activeTab;
         const matchesImpact = highImpactOnly ? news.impact === 'High' : true;
 
         return matchesSearch && matchesTab && matchesImpact;
     });
 
     return (
-        <div className="w-full min-h-screen bg-[#07090e] pb-24 text-gray-200 font-sans">
+        <div className="w-full min-h-screen pb-20 text-gray-200 font-sans">
             
             {/* --- STICKY TOP HEADER --- */}
-            <div className="sticky top-0 z-40 bg-[#07090e]/80 backdrop-blur-xl border-b border-white/5 pt-6 pb-4 px-4 sm:px-8 shadow-sm">
+            <div className="sticky top-0 z-40 bg-[#0a0a0f]/80 backdrop-blur-xl border-b border-white/5 pt-6 pb-4 px-4 sm:px-8 shadow-sm">
                 <div className="max-w-4xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
                     
                     {/* Title & Live Badge */}
@@ -122,18 +90,24 @@ const NewsSentimentDashboard = () => {
                     </div>
                 </div>
 
-                {/* --- OPTIONAL INSIGHT STRIP --- */}
+                {/* --- INSIGHT STRIP --- */}
                 <div className="max-w-4xl mx-auto mt-4 px-1 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs sm:text-sm">
                     <div className="flex items-center gap-2">
                         <span className="text-gray-500 font-bold tracking-wider uppercase">Market Mood:</span>
                         <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/5 border border-white/10">
-                            <TrendingDown className="w-4 h-4 text-orange-400" />
-                            <span className="font-semibold text-gray-300">Slightly Bearish</span>
+                            {overallMood.includes('Bearish') ? (
+                                <TrendingDown className="w-4 h-4 text-orange-400" />
+                            ) : overallMood.includes('Bullish') ? (
+                                <TrendingUp className="w-4 h-4 text-green-400" />
+                            ) : (
+                                <Activity className="w-4 h-4 text-blue-400" />
+                            )}
+                            <span className="font-semibold text-gray-300">{overallMood}</span>
                         </div>
                     </div>
                     <div className="flex items-center gap-2 truncate text-gray-400">
                         <Zap className="w-3.5 h-3.5 text-yellow-500 flex-shrink-0" />
-                        <span className="truncate"><strong>Top Impact:</strong> Global Central Banks Signal Slower Rate Cuts Amid Stuck Inflation Data</span>
+                        <span className="truncate"><strong>Top Impact:</strong> {topImpactHeadline}</span>
                     </div>
                 </div>
             </div>
@@ -186,106 +160,126 @@ const NewsSentimentDashboard = () => {
 
                 {/* --- NEWS FEED --- */}
                 <div className="space-y-5">
-                    <AnimatePresence mode="popLayout">
-                        {filteredNews.length === 0 ? (
-                            <motion.div 
-                                initial={{ opacity: 0, scale: 0.95 }} 
-                                animate={{ opacity: 1, scale: 1 }} 
-                                exit={{ opacity: 0, scale: 0.95 }}
-                                className="w-full flex flex-col items-center justify-center py-20 text-center"
-                            >
-                                <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center text-gray-500 mb-4">
-                                    <Filter className="w-8 h-8" />
-                                </div>
-                                <h3 className="text-xl font-bold text-gray-300">No signals found</h3>
-                                <p className="text-gray-500 mt-2">Try adjusting your filters or search criteria.</p>
-                            </motion.div>
-                        ) : (
-                            filteredNews.map((news) => {
-                                const isPositive = news.sentiment === 'Positive';
-                                const isNegative = news.sentiment === 'Negative';
-                                const isHighImpact = news.impact === 'High';
+                    {loading ? (
+                        <div className="flex flex-col items-center justify-center py-20 gap-4">
+                            <RefreshCcw className="w-10 h-10 text-blue-500 animate-spin" />
+                            <p className="text-gray-400 font-semibold tracking-wider uppercase text-sm">Aggregating Market Intelligence...</p>
+                        </div>
+                    ) : error ? (
+                        <div className="flex flex-col items-center justify-center py-20 gap-4 bg-red-500/5 rounded-2xl border border-red-500/20 p-8">
+                            <ShieldAlert className="w-10 h-10 text-red-400" />
+                            <p className="text-red-300 font-medium text-center">{error}</p>
+                            <button onClick={() => { setLoading(true); fetchNews(); }} className="px-6 py-2 bg-red-500/10 hover:bg-red-500/20 rounded-xl text-red-300 font-bold transition-all border border-red-500/20">
+                                Retry
+                            </button>
+                        </div>
+                    ) : (
+                        <AnimatePresence mode="popLayout">
+                            {filteredNews.length === 0 ? (
+                                <motion.div 
+                                    initial={{ opacity: 0, scale: 0.95 }} 
+                                    animate={{ opacity: 1, scale: 1 }} 
+                                    exit={{ opacity: 0, scale: 0.95 }}
+                                    className="w-full flex flex-col items-center justify-center py-20 text-center"
+                                >
+                                    <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center text-gray-500 mb-4">
+                                        <Filter className="w-8 h-8" />
+                                    </div>
+                                    <h3 className="text-xl font-bold text-gray-300">No signals found</h3>
+                                    <p className="text-gray-500 mt-2">Try adjusting your filters or search criteria.</p>
+                                </motion.div>
+                            ) : (
+                                filteredNews.map((news, idx) => {
+                                    const isPositive = news.sentiment_label === 'Positive';
+                                    const isNegative = news.sentiment_label === 'Negative';
+                                    const isHighImpact = news.impact === 'High';
 
-                                return (
-                                    <motion.div
-                                        key={news.id}
-                                        layout
-                                        initial={{ opacity: 0, y: 15 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, scale: 0.98 }}
-                                        transition={{ duration: 0.2 }}
-                                        className="group relative bg-[#12161f] border border-white/5 rounded-2xl p-5 sm:p-6 hover:bg-[#161b26] hover:border-white/10 transition-all hover:-translate-y-0.5"
-                                    >
-                                        {/* Left Accent Bar */}
-                                        <div className={`absolute top-0 bottom-0 left-0 w-1 rounded-l-2xl ${
-                                            isPositive ? 'bg-green-500 shadow-[0_0_15px_rgba(34,197,94,0.4)]' :
-                                            isNegative ? 'bg-red-500 shadow-[0_0_15px_rgba(239,68,68,0.4)]' :
-                                            'bg-gray-500'
-                                        }`} />
+                                    return (
+                                        <motion.a
+                                            key={`${news.title}-${idx}`}
+                                            href={news.url !== '#' ? news.url : undefined}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            layout
+                                            initial={{ opacity: 0, y: 15 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0, scale: 0.98 }}
+                                            transition={{ duration: 0.2, delay: idx * 0.03 }}
+                                            className="group relative block bg-[#12161f] border border-white/5 rounded-2xl p-5 sm:p-6 hover:bg-[#161b26] hover:border-white/10 transition-all hover:-translate-y-0.5"
+                                        >
+                                            {/* Left Accent Bar */}
+                                            <div className={`absolute top-0 bottom-0 left-0 w-1 rounded-l-2xl ${
+                                                isPositive ? 'bg-green-500 shadow-[0_0_15px_rgba(34,197,94,0.4)]' :
+                                                isNegative ? 'bg-red-500 shadow-[0_0_15px_rgba(239,68,68,0.4)]' :
+                                                'bg-gray-500'
+                                            }`} />
 
-                                        {/* Content Wrapper */}
-                                        <div className="pl-3 sm:pl-4 space-y-4">
-                                            
-                                            {/* Meta Header */}
-                                            <div className="flex flex-wrap items-center justify-between gap-3">
-                                                <div className="flex items-center gap-3 text-xs font-semibold text-gray-400 uppercase tracking-wider">
-                                                    <span className="flex items-center gap-1.5"><Newspaper className="w-3.5 h-3.5"/> {news.source}</span>
-                                                    <span className="w-1 h-1 rounded-full bg-gray-600" />
-                                                    <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5"/> {news.time}</span>
-                                                </div>
+                                            {/* Content Wrapper */}
+                                            <div className="pl-3 sm:pl-4 space-y-4">
                                                 
-                                                {/* Sentiment & Impact Badges */}
-                                                <div className="flex items-center gap-2">
-                                                    {isHighImpact && (
-                                                        <span className="flex items-center gap-1 px-2.5 py-1 text-[10px] sm:text-xs font-black uppercase text-yellow-400 bg-yellow-500/10 border border-yellow-500/20 rounded-md">
-                                                            <ShieldAlert className="w-3 h-3" /> HIGH IMPACT
+                                                {/* Meta Header */}
+                                                <div className="flex flex-wrap items-center justify-between gap-3">
+                                                    <div className="flex items-center gap-3 text-xs font-semibold text-gray-400 uppercase tracking-wider">
+                                                        <span className="flex items-center gap-1.5"><Newspaper className="w-3.5 h-3.5"/> {news.source || 'Market Intel'}</span>
+                                                        <span className="w-1 h-1 rounded-full bg-gray-600" />
+                                                        <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5"/> {news.created_at ? new Date(news.created_at).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }) : 'Recent'}</span>
+                                                    </div>
+                                                    
+                                                    {/* Sentiment & Impact Badges */}
+                                                    <div className="flex items-center gap-2">
+                                                        {isHighImpact && (
+                                                            <span className="flex items-center gap-1 px-2.5 py-1 text-[10px] sm:text-xs font-black uppercase text-yellow-400 bg-yellow-500/10 border border-yellow-500/20 rounded-md">
+                                                                <ShieldAlert className="w-3 h-3" /> HIGH IMPACT
+                                                            </span>
+                                                        )}
+                                                        <span className="flex items-center gap-1.5 px-2.5 py-1 text-xs font-bold rounded-md bg-[#0d1117] border border-white/5">
+                                                            <span className={`w-2 h-2 rounded-full ${
+                                                                isPositive ? 'bg-green-500 shadow-[0_0_6px_rgba(34,197,94,0.6)]' :
+                                                                isNegative ? 'bg-red-500 shadow-[0_0_6px_rgba(239,68,68,0.6)]' :
+                                                                'bg-gray-400'
+                                                            }`} />
+                                                            {news.sentiment_label || 'Neutral'}
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                                {/* Headline */}
+                                                <h2 className="text-xl md:text-2xl font-bold text-white tracking-tight leading-snug group-hover:text-blue-100 transition-colors">
+                                                    {news.title}
+                                                </h2>
+
+                                                {/* AI Insight Bar */}
+                                                {news.ai_insight && (
+                                                    <div className="flex items-start gap-3 p-3.5 bg-blue-500/5 border border-blue-500/10 rounded-xl">
+                                                        <Brain className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" />
+                                                        <div>
+                                                            <div className="text-[10px] font-black text-blue-500/80 uppercase tracking-widest mb-0.5">Analyst Engine</div>
+                                                            <p className="text-sm text-blue-100/80 leading-relaxed font-medium">"{news.ai_insight}"</p>
+                                                        </div>
+                                                    </div>
+                                                )}
+
+                                                {/* Footer Elements */}
+                                                <div className="pt-2 flex flex-wrap items-center gap-2">
+                                                    <span className="px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-gray-500 bg-white/5 rounded-full border border-white/5 flex items-center gap-1.5">
+                                                        {news.category === 'Company' || news.category === 'Earnings' || news.category === 'Corporate Action' ? <Building2 className="w-3 h-3"/> :
+                                                         news.category === 'Global Policy' ? <Globe className="w-3 h-3"/> : <BarChart3 className="w-3 h-3"/>}
+                                                        {news.category || 'General'}
+                                                    </span>
+                                                    {news.related_symbol && (
+                                                        <span className="px-2.5 py-1 text-[11px] font-bold text-white bg-blue-600/20 border border-blue-500/30 rounded-full hover:bg-blue-600/40 cursor-pointer transition-colors">
+                                                            ${news.related_symbol}
                                                         </span>
                                                     )}
-                                                    <span className="flex items-center gap-1.5 px-2.5 py-1 text-xs font-bold rounded-md bg-[#0d1117] border border-white/5">
-                                                        <span className={`w-2 h-2 rounded-full ${
-                                                            isPositive ? 'bg-green-500 shadow-[0_0_6px_rgba(34,197,94,0.6)]' :
-                                                            isNegative ? 'bg-red-500 shadow-[0_0_6px_rgba(239,68,68,0.6)]' :
-                                                            'bg-gray-400'
-                                                        }`} />
-                                                        {news.sentiment}
-                                                    </span>
                                                 </div>
+
                                             </div>
-
-                                            {/* Headline */}
-                                            <h2 className="text-xl md:text-2xl font-bold text-white tracking-tight leading-snug group-hover:text-blue-100 transition-colors">
-                                                {news.headline}
-                                            </h2>
-
-                                            {/* AI Insight Bar */}
-                                            <div className="flex items-start gap-3 p-3.5 bg-blue-500/5 border border-blue-500/10 rounded-xl">
-                                                <Brain className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" />
-                                                <div>
-                                                    <div className="text-[10px] font-black text-blue-500/80 uppercase tracking-widest mb-0.5">Analyst Engine</div>
-                                                    <p className="text-sm text-blue-100/80 leading-relaxed font-medium">"{news.aiInsight}"</p>
-                                                </div>
-                                            </div>
-
-                                            {/* Footer Elements */}
-                                            <div className="pt-2 flex flex-wrap items-center gap-2">
-                                                <span className="px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-gray-500 bg-white/5 rounded-full border border-white/5 flex items-center gap-1.5">
-                                                    {news.category === 'Company' || news.category === 'Earnings' || news.category === 'Corporate Action' ? <Building2 className="w-3 h-3"/> :
-                                                     news.category === 'Global Policy' ? <Globe className="w-3 h-3"/> : <BarChart3 className="w-3 h-3"/>}
-                                                    {news.category}
-                                                </span>
-                                                {news.relatedSymbols.map(sym => (
-                                                    <span key={sym} className="px-2.5 py-1 text-[11px] font-bold text-white bg-blue-600/20 border border-blue-500/30 rounded-full hover:bg-blue-600/40 cursor-pointer transition-colors">
-                                                        ${sym}
-                                                    </span>
-                                                ))}
-                                            </div>
-
-                                        </div>
-                                    </motion.div>
-                                );
-                            })
-                        )}
-                    </AnimatePresence>
+                                        </motion.a>
+                                    );
+                                })
+                            )}
+                        </AnimatePresence>
+                    )}
                 </div>
             </div>
         </div>

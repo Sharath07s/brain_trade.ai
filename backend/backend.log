@@ -1,0 +1,365 @@
+INFO:     Will watch for changes in these directories: ['/Users/sharathhn/Documents/new_prj/new_prj2/backend']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [7422] using StatReload
+INFO:     Started server process [7424]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Symbol resolver loaded 2132 NSE symbols
+INFO:     127.0.0.1:52837 - "GET /news/general HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52884 - "GET /social/social-feed/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52884 - "GET /social/social-feed/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52883 - "GET /news/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52881 - "GET /sentiment/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52883 - "GET /news/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52881 - "GET /sentiment/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52878 - "GET /predict/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52878 - "GET /predict/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52880 - "GET /stock/TSLA?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52880 - "GET /stock/TSLA?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52880 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52880 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52880 - "GET /search?q=tc HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:52880 - "GET /search/?q=tc HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52880 - "GET /search?q=tcs HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:52880 - "GET /search/?q=tcs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52897 - "GET /sentiment/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52898 - "GET /news/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52899 - "GET /social/social-feed/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52897 - "GET /sentiment/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52898 - "GET /news/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52899 - "GET /social/social-feed/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52897 - "GET /sentiment/TCS.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52901 - "GET /news/TCS.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52897 - "GET /social/social-feed/TCS.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52901 - "GET /sentiment/TCS.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52897 - "GET /news/TCS.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52901 - "GET /social/social-feed/TCS.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52880 - "GET /predict/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52901 - "GET /predict/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52886 - "GET /stock/TSLA?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52886 - "GET /stock/TSLA?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52886 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52886 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52898 - "GET /stock/TCS.NS?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52898 - "GET /stock/TCS.NS?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52899 - "GET /predict/TCS.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52899 - "GET /predict/TCS.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52908 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52914 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52916 - "GET /search?q=in HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:52916 - "GET /search/?q=in HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52916 - "GET /search?q=infy HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:52916 - "GET /search/?q=infy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52923 - "GET /sentiment/TCS.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52925 - "GET /news/TCS.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52926 - "GET /social/social-feed/TCS.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52923 - "GET /sentiment/TCS.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52925 - "GET /news/TCS.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52926 - "GET /social/social-feed/TCS.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52923 - "GET /sentiment/INFY.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52929 - "GET /news/INFY.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52923 - "GET /social/social-feed/INFY.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52929 - "GET /sentiment/INFY.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52923 - "GET /news/INFY.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52929 - "GET /social/social-feed/INFY.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52916 - "GET /predict/TCS.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52916 - "GET /predict/TCS.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52921 - "GET /stock/TCS.NS?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52921 - "GET /stock/TCS.NS?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52926 - "GET /predict/INFY.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52926 - "GET /predict/INFY.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52925 - "GET /stock/INFY.NS?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52925 - "GET /stock/INFY.NS?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52925 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52925 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52937 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52937 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52937 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52947 - "GET /social/social-feed/NIFTY_50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52947 - "GET /social/social-feed/NIFTY_50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52947 - "GET /social/social-feed/NIFTY_50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52946 - "GET /news/NIFTY_50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52946 - "GET /news/NIFTY_50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52946 - "GET /news/NIFTY_50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52943 - "GET /sentiment/NIFTY_50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52943 - "GET /sentiment/NIFTY_50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52943 - "GET /sentiment/NIFTY_50 HTTP/1.1" 200 OK
+$NIFTY_50: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$L&TFH.NS: possibly delisted; no price data found  (period=1d) (Yahoo error = "No data found, symbol may be delisted")
+HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: NIFTY_50"}}}
+$NIFTY_50.NS: possibly delisted; no price data found  (period=5d)
+INFO:     127.0.0.1:52937 - "GET /predict/NIFTY_50 HTTP/1.1" 200 OK
+$NIFTY_50: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$NIFTY_50: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$NIFTY_50.NS: possibly delisted; no price data found  (period=5d)
+INFO:     127.0.0.1:52937 - "GET /predict/NIFTY_50 HTTP/1.1" 200 OK
+$NIFTY_50.NS: possibly delisted; no price data found  (period=5d)
+INFO:     127.0.0.1:52941 - "GET /stock/NIFTY_50?timeframe=1M HTTP/1.1" 200 OK
+$NIFTY_50: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$NIFTY_50: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$NIFTY_50.NS: possibly delisted; no price data found  (period=5d)
+INFO:     127.0.0.1:52937 - "GET /predict/NIFTY_50 HTTP/1.1" 200 OK
+$NIFTY_50.NS: possibly delisted; no price data found  (period=5d)
+INFO:     127.0.0.1:52941 - "GET /stock/NIFTY_50?timeframe=1M HTTP/1.1" 200 OK
+$NIFTY_50: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$TATAMOTORS.NS: possibly delisted; no price data found  (period=1d) (Yahoo error = "No data found, symbol may be delisted")
+$NIFTY_50.NS: possibly delisted; no price data found  (period=5d)
+INFO:     127.0.0.1:52941 - "GET /stock/NIFTY_50?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52946 - "GET /news/NIFTY_50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52943 - "GET /sentiment/NIFTY_50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52955 - "GET /social/social-feed/NIFTY_50 HTTP/1.1" 200 OK
+$NIFTY_50: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$NIFTY_50.NS: possibly delisted; no price data found  (period=5d)
+INFO:     127.0.0.1:52937 - "GET /stock/NIFTY_50?timeframe=1M HTTP/1.1" 200 OK
+$NIFTY_50: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$NIFTY_50.NS: possibly delisted; no price data found  (period=5d)
+INFO:     127.0.0.1:52941 - "GET /predict/NIFTY_50 HTTP/1.1" 200 OK
+$ZOMATO.NS: possibly delisted; no price data found  (period=1d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:     127.0.0.1:52939 - "GET /stock/indian-growth HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52939 - "GET /stock/indian-growth HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52941 - "GET /stock/indian-growth HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52941 - "GET /stock/indian-growth HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52965 - "GET /sentiment/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52966 - "GET /news/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52967 - "GET /social/social-feed/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52965 - "GET /sentiment/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52966 - "GET /news/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52967 - "GET /social/social-feed/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52965 - "GET /sentiment/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52966 - "GET /news/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52967 - "GET /social/social-feed/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52967 - "GET /sentiment/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52965 - "GET /social/social-feed/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52966 - "GET /news/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52967 - "GET /sentiment/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52965 - "GET /social/social-feed/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52966 - "GET /news/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52939 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52939 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52941 - "GET /predict/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52941 - "GET /predict/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52941 - "GET /predict/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52941 - "GET /predict/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52941 - "GET /predict/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52937 - "GET /stock/TSLA?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52937 - "GET /stock/TSLA?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52937 - "GET /stock/TSLA?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52937 - "GET /stock/TSLA?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52937 - "GET /stock/TSLA?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52937 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52937 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52937 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52941 - "GET /stock/indian-growth HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52937 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52941 - "GET /stock/indian-growth HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52974 - "GET /social/social-feed/ICICIBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52974 - "GET /social/social-feed/ICICIBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52974 - "GET /social/social-feed/ICICIBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52973 - "GET /news/ICICIBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52973 - "GET /news/ICICIBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52973 - "GET /news/ICICIBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52972 - "GET /sentiment/ICICIBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52972 - "GET /sentiment/ICICIBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52972 - "GET /sentiment/ICICIBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52937 - "GET /stock/ICICIBANK?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52941 - "GET /predict/ICICIBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52941 - "GET /predict/ICICIBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52937 - "GET /stock/ICICIBANK?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52941 - "GET /predict/ICICIBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52937 - "GET /stock/ICICIBANK?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52937 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52937 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52941 - "GET /stock/indian-growth HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52941 - "GET /stock/indian-growth HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52937 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52937 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52983 - "GET /social/social-feed/BANK_NIFTY HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52983 - "GET /social/social-feed/BANK_NIFTY HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52983 - "GET /social/social-feed/BANK_NIFTY HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52982 - "GET /news/BANK_NIFTY HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52982 - "GET /news/BANK_NIFTY HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52982 - "GET /news/BANK_NIFTY HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52979 - "GET /sentiment/BANK_NIFTY HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52979 - "GET /sentiment/BANK_NIFTY HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52979 - "GET /sentiment/BANK_NIFTY HTTP/1.1" 200 OK
+$BANK_NIFTY: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$BANK_NIFTY: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$BANK_NIFTY.NS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$BANK_NIFTY.NS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:     127.0.0.1:52941 - "GET /stock/BANK_NIFTY?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52937 - "GET /predict/BANK_NIFTY HTTP/1.1" 200 OK
+$BANK_NIFTY: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$BANK_NIFTY: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$BANK_NIFTY.NS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:     127.0.0.1:52941 - "GET /predict/BANK_NIFTY HTTP/1.1" 200 OK
+$BANK_NIFTY.NS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:     127.0.0.1:52937 - "GET /stock/BANK_NIFTY?timeframe=1M HTTP/1.1" 200 OK
+$BANK_NIFTY: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$BANK_NIFTY: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$BANK_NIFTY.NS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:     127.0.0.1:52941 - "GET /predict/BANK_NIFTY HTTP/1.1" 200 OK
+$BANK_NIFTY.NS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:     127.0.0.1:52937 - "GET /stock/BANK_NIFTY?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52937 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52937 - "GET /stock/indices HTTP/1.1" 200 OK
+$L&TFH.NS: possibly delisted; no price data found  (period=1d) (Yahoo error = "No data found, symbol may be delisted")
+$TATAMOTORS.NS: possibly delisted; no price data found  (period=1d) (Yahoo error = "No data found, symbol may be delisted")
+$ZOMATO.NS: possibly delisted; no price data found  (period=1d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:     127.0.0.1:52941 - "GET /stock/indian-growth HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52941 - "GET /stock/indian-growth HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52998 - "GET /social/social-feed/M%26M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52998 - "GET /social/social-feed/M%26M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52998 - "GET /social/social-feed/M%26M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52997 - "GET /news/M%26M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52997 - "GET /news/M%26M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52997 - "GET /news/M%26M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52995 - "GET /sentiment/M%26M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52995 - "GET /sentiment/M%26M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52995 - "GET /sentiment/M%26M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52941 - "GET /predict/M%26M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52941 - "GET /predict/M%26M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52941 - "GET /predict/M%26M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52993 - "GET /stock/M%26M?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52993 - "GET /stock/M%26M?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52993 - "GET /stock/M%26M?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52993 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52993 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53006 - "GET /sentiment/M%26M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53009 - "GET /news/M%26M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53010 - "GET /social/social-feed/M%26M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52993 - "GET /predict/M%26M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53005 - "GET /stock/M%26M?timeframe=5D HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53005 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53005 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53012 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53014 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53014 - "GET /stock/%5ENSEI?timeframe=1m HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53014 - "GET /stock/%5EBSESN?timeframe=1m HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53014 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53014 - "GET /predict/%5EBSESN HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53023 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53023 - "GET /predict/%5EBSESN HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53029 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53029 - "GET /stock/%5ENSEI?timeframe=1m HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53031 - "GET /stock/%5ECNXIT?timeframe=1m HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53031 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53031 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53031 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53038 - "GET /sentiment/NIFTY_50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53040 - "GET /news/NIFTY_50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53041 - "GET /social/social-feed/NIFTY_50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53038 - "GET /sentiment/NIFTY_50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53040 - "GET /news/NIFTY_50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53041 - "GET /social/social-feed/NIFTY_50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53038 - "GET /sentiment/NIFTY_50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53040 - "GET /news/NIFTY_50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53041 - "GET /social/social-feed/NIFTY_50 HTTP/1.1" 200 OK
+$L&TFH.NS: possibly delisted; no price data found  (period=1d) (Yahoo error = "No data found, symbol may be delisted")
+$NIFTY_50: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$NIFTY_50: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$NIFTY_50.NS: possibly delisted; no price data found  (period=5d)
+INFO:     127.0.0.1:53031 - "GET /predict/NIFTY_50 HTTP/1.1" 200 OK
+$NIFTY_50.NS: possibly delisted; no price data found  (period=5d)
+INFO:     127.0.0.1:53036 - "GET /stock/NIFTY_50?timeframe=1M HTTP/1.1" 200 OK
+$NIFTY_50: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$NIFTY_50: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$NIFTY_50.NS: possibly delisted; no price data found  (period=5d)
+INFO:     127.0.0.1:53031 - "GET /predict/NIFTY_50 HTTP/1.1" 200 OK
+$NIFTY_50.NS: possibly delisted; no price data found  (period=5d)
+INFO:     127.0.0.1:53036 - "GET /stock/NIFTY_50?timeframe=1M HTTP/1.1" 200 OK
+$NIFTY_50: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$NIFTY_50: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$TATAMOTORS.NS: possibly delisted; no price data found  (period=1d) (Yahoo error = "No data found, symbol may be delisted")
+$NIFTY_50.NS: possibly delisted; no price data found  (period=5d)
+$NIFTY_50.NS: possibly delisted; no price data found  (period=5d)
+INFO:     127.0.0.1:53031 - "GET /predict/NIFTY_50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53036 - "GET /stock/NIFTY_50?timeframe=1M HTTP/1.1" 200 OK
+$ZOMATO.NS: possibly delisted; no price data found  (period=1d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:     127.0.0.1:53040 - "GET /sentiment/NIFTY_50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53038 - "GET /news/NIFTY_50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53053 - "GET /social/social-feed/NIFTY_50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53040 - "GET /sentiment/NIFTY_50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53038 - "GET /news/NIFTY_50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53053 - "GET /social/social-feed/NIFTY_50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53040 - "GET /sentiment/NIFTY_50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53038 - "GET /news/NIFTY_50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53053 - "GET /social/social-feed/NIFTY_50 HTTP/1.1" 200 OK
+$NIFTY_50: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$NIFTY_50: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$NIFTY_50.NS: possibly delisted; no price data found  (period=5d)
+INFO:     127.0.0.1:53041 - "GET /stock/NIFTY_50?timeframe=1M HTTP/1.1" 200 OK
+$NIFTY_50.NS: possibly delisted; no price data found  (period=5d)
+INFO:     127.0.0.1:53031 - "GET /predict/NIFTY_50 HTTP/1.1" 200 OK
+$NIFTY_50: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$NIFTY_50: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$NIFTY_50.NS: possibly delisted; no price data found  (period=5d)
+INFO:     127.0.0.1:53031 - "GET /predict/NIFTY_50 HTTP/1.1" 200 OK
+$NIFTY_50.NS: possibly delisted; no price data found  (period=5d)
+INFO:     127.0.0.1:53041 - "GET /stock/NIFTY_50?timeframe=1M HTTP/1.1" 200 OK
+$NIFTY_50: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$NIFTY_50.NS: possibly delisted; no price data found  (period=5d)
+INFO:     127.0.0.1:53041 - "GET /stock/NIFTY_50?timeframe=1M HTTP/1.1" 200 OK
+$NIFTY_50: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:     127.0.0.1:53053 - "GET /stock/indian-growth HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53053 - "GET /stock/indian-growth HTTP/1.1" 200 OK
+$L&TFH.NS: possibly delisted; no price data found  (period=1d) (Yahoo error = "No data found, symbol may be delisted")
+$NIFTY_50.NS: possibly delisted; no price data found  (period=5d)
+INFO:     127.0.0.1:53031 - "GET /predict/NIFTY_50 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53058 - "GET /social/social-feed/HAL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53058 - "GET /social/social-feed/HAL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53058 - "GET /social/social-feed/HAL HTTP/1.1" 200 OK
+$TATAMOTORS.NS: possibly delisted; no price data found  (period=1d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:     127.0.0.1:53040 - "GET /news/HAL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53040 - "GET /news/HAL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53040 - "GET /news/HAL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53038 - "GET /sentiment/HAL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53038 - "GET /sentiment/HAL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53038 - "GET /sentiment/HAL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53053 - "GET /stock/HAL?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53053 - "GET /stock/HAL?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53053 - "GET /stock/HAL?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53031 - "GET /predict/HAL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53031 - "GET /predict/HAL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53031 - "GET /predict/HAL HTTP/1.1" 200 OK
+$ZOMATO.NS: possibly delisted; no price data found  (period=1d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:     127.0.0.1:53041 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53041 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53041 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53041 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53041 - "GET /predict/HAL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53053 - "GET /sentiment/HAL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53040 - "GET /social/social-feed/HAL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53038 - "GET /news/HAL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53031 - "GET /stock/HAL?timeframe=5D HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53031 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53031 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53065 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53074 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53079 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53083 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53085 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53087 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53119 - "GET /stock/%5ENSEI?timeframe=1m HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53117 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53124 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53124 - "GET /stock/%5EBSESN?timeframe=1m HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53126 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53126 - "GET /stock/%5ENSEBANK?timeframe=1m HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53126 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53128 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53134 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53141 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53144 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53146 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53148 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53148 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53148 - "GET /stock/%5ECNXIT?timeframe=1m HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53164 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53167 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53169 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53171 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53173 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53175 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53187 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53200 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53212 - "GET /stock/indices HTTP/1.1" 200 OK

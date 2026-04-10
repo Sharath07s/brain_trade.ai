@@ -1,4 +1,4 @@
-const API_BASE = "http://127.0.0.1:8000";
+const API_BASE = "http://localhost:8000";
 
 export const getPrediction = async (symbol: string) => {
   const res = await fetch(`${API_BASE}/predict/${symbol}`);
@@ -21,6 +21,18 @@ export const getSentiment = async (symbol: string) => {
 export const getNews = async (symbol: string) => {
   const res = await fetch(`${API_BASE}/news/${symbol}`);
   if (!res.ok) throw new Error("Failed to fetch news");
+  return res.json();
+};
+
+export const getGeneralNews = async () => {
+  const res = await fetch(`${API_BASE}/news/general`);
+  if (!res.ok) throw new Error("Failed to fetch general news");
+  return res.json();
+};
+
+export const getAlerts = async () => {
+  const res = await fetch(`${API_BASE}/predict/alerts`);
+  if (!res.ok) throw new Error("Failed to fetch alerts");
   return res.json();
 };
 

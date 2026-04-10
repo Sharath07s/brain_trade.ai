@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { TrendingUp, TrendingDown, Flame, Brain, BarChart2, LayoutGrid, Clock } from 'lucide-react';
 import { AreaChart, Area, ResponsiveContainer } from 'recharts';
 import { getMarketIndices, getIndianGrowthStocks } from '../services/api';
+import { useNavigate } from 'react-router-dom';
 
 const generateSparkline = (points: number, trend: 'up'|'down'|'neutral') => {
     let current = 100;
@@ -36,6 +37,7 @@ const SkeletonCard = ({ className = "" }) => (
 );
 
 const Markets = () => {
+    const navigate = useNavigate();
     const [trendingData, setTrendingData] = useState<any[]>([]);
     const [indicesData, setIndicesData] = useState<any[]>([]);
     const [marketStatus, setMarketStatus] = useState<string>("LOADING");
@@ -136,7 +138,8 @@ const Markets = () => {
                                 <motion.div 
                                     key={idx.name}
                                     whileHover={{ scale: 1.02 }}
-                                    className={`min-w-[200px] flex-shrink-0 bg-[#0d1117] border rounded-2xl p-4 relative overflow-hidden transition-all duration-300 ${isUp ? 'border-green-500/20 hover:border-green-500/50 hover:shadow-[0_0_20px_rgba(0,255,136,0.1)]' : 'border-red-500/20 hover:border-red-500/50 hover:shadow-[0_0_20px_rgba(255,51,102,0.1)]'}`}
+                                    onClick={() => navigate(`/dashboard/${idx.name.replace(/ /g, '_')}`)}
+                                    className={`min-w-[200px] flex-shrink-0 bg-[#0d1117] border rounded-2xl p-4 relative overflow-hidden transition-all duration-300 cursor-pointer ${isUp ? 'border-green-500/20 hover:border-green-500/50 hover:shadow-[0_0_20px_rgba(0,255,136,0.1)]' : 'border-red-500/20 hover:border-red-500/50 hover:shadow-[0_0_20px_rgba(255,51,102,0.1)]'}`}
                                 >
                                     <div className={`absolute top-0 right-0 w-24 h-24 blur-[40px] rounded-full pointer-events-none ${isUp ? 'bg-green-500/10' : 'bg-red-500/10'}`} />
                                     <div className="relative z-10">
@@ -190,6 +193,7 @@ const Markets = () => {
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ delay: i * 0.05 }}
                                         whileHover={{ scale: 1.02 }}
+                                        onClick={() => navigate(`/dashboard/${stock.sym}`)}
                                         className={`bg-[#0d1117] border rounded-2xl p-5 relative overflow-hidden group cursor-pointer ${isPulsing ? 'border-orange-500/30 shadow-[0_0_30px_rgba(249,115,22,0.05)]' : 'border-white/5 hover:border-white/20 hover:bg-white/5'}`}
                                     >
                                         <div className="flex justify-between items-start">

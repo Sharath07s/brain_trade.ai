@@ -18,6 +18,12 @@ const Sidebar = () => {
                 <NavItem to="/alerts" icon={<Bell size={22} />} label="Alerts" />
                 <NavItem to="/settings" icon={<Settings size={22} />} label="Settings" />
             </nav>
+
+            <div className="mt-auto pb-8 hidden lg:flex flex-col items-center justify-center text-center px-4">
+                <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-4" />
+                <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">BrainTrade AI Core</p>
+                <p className="text-[10px] text-gray-600 mt-1">v2.1.0-beta</p>
+            </div>
         </aside>
     );
 };
@@ -37,10 +43,13 @@ const NavItem = ({ to, icon, label }: { to: string, icon: React.ReactNode, label
             {({ isActive }) => (
                 <motion.div
                     whileHover={{ x: isActive ? 0 : 5 }}
-                    className="flex flex-row items-center w-full justify-center lg:justify-start"
+                    className="flex flex-row items-center w-full justify-center lg:justify-start relative"
                 >
                     {icon}
                     <span className="ml-3 font-medium hidden lg:block">{label}</span>
+                    {isActive && (
+                        <div className="absolute right-2 top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-accent rounded-full shadow-[0_0_8px_rgba(0,240,255,0.8)] hidden lg:block" />
+                    )}
                 </motion.div>
             )}
         </NavLink>
