@@ -16,6 +16,15 @@ const formatLargeValue = (value: number, currency: string) => {
     return sym + value.toLocaleString();
 };
 
+const SYMBOL_MAP: Record<string, string> = {
+    "NIFTY_50": "^NSEI",
+    "SENSEX": "^BSESN",
+    "BANK_NIFTY": "^NSEBANK",
+    "NIFTY_IT": "^CNXIT",
+    "NIFTY_AUTO": "^CNXAUTO",
+    "NIFTY_FMCG": "^CNXFMCG"
+};
+
 const checkMarketOpen = () => {
     // Current UTC time
     const now = new Date();
@@ -30,10 +39,10 @@ const checkMarketOpen = () => {
     // Weekends closed
     if (day === 0 || day === 6) return false;
     
-    // Open exactly after 10:00 AM IST, close at 3:30 PM (15:30) IST
+    // NSE Market Hours: 9:15 AM IST to 3:30 PM IST
     const timeInMinutes = hours * 60 + minutes;
-    const openTime = 10 * 60; // 10:00 AM
-    const closeTime = 15 * 60 + 30; // 3:30 PM
+    const openTime = 9 * 60 + 15;   // 9:15 AM IST
+    const closeTime = 15 * 60 + 35;  // 3:35 PM IST (5 min buffer for settlement)
     
     return timeInMinutes >= openTime && timeInMinutes < closeTime;
 };
@@ -73,21 +82,30 @@ const Dashboard = () => {
       return () => clearInterval(interval);
   }, []);
 
-  const fetchData = async (sym: string, tf: string = '1M') => {
+  const fetchData = async (sym: string, tf: string = '1M', retries = 1) => {
     setLoading(true);
     setError('');
     // Reset live data on new symbol load
     setLiveTickPrice(null);
+    
+    // Apply symbol mapping if needed
+    const apiSymbol = SYMBOL_MAP[sym] || sym;
+    console.log("Requested Symbol:", sym, "-> Mapped API Symbol:", apiSymbol);
+
     try {
       const [predData, stockData, sentData, newsData, feedData] = await Promise.all([
-        getPrediction(sym).catch((e) => { console.error('Prediction error:', e); return null; }),
-        getStock(sym, tf).catch((e) => { console.error('Stock API error:', e); return { error: e.message }; }),
-        getSentiment(sym).catch((e) => { console.error('Sentiment error:', e); return null; }),
-        getNews(sym).catch((e) => { console.error('News error:', e); return { news: [] }; }),
-        getSocialFeed(sym).catch((e) => { console.error('Social error:', e); return { feed: [] }; })
+        getPrediction(apiSymbol).catch((e) => { console.error('Prediction error:', e); return null; }),
+        getStock(apiSymbol, tf).catch((e) => { console.error('Stock API error:', e); return { error: e.message }; }),
+        getSentiment(apiSymbol).catch((e) => { console.error('Sentiment error:', e); return null; }),
+        getNews(apiSymbol).catch((e) => { console.error('News error:', e); return { news: [] }; }),
+        getSocialFeed(apiSymbol).catch((e) => { console.error('Social error:', e); return { feed: [] }; })
       ]);
       
-      if (!stockData || stockData.error) throw new Error(stockData?.error || "Failed to interact with backend data source");
+      console.log("API Response (Stock):", stockData);
+
+      if (!stockData || stockData.error) {
+          throw new Error(stockData?.error || "Failed to fetch symbol data from provider.");
+      }
       
       setPrediction(predData);
       setStock(stockData);
@@ -96,9 +114,15 @@ const Dashboard = () => {
       setSocialFeed(feedData?.feed || []);
     } catch (err: any) {
       console.error("Dashboard Fetch Error:", err);
-      setError(err.message || "Failed to load data. Ensure backend is running.");
+      if (retries > 0) {
+          console.log(`Retrying fetch for ${apiSymbol}...`);
+          return fetchData(sym, tf, retries - 1); // retry fetching
+      }
+      setError(err.message || "Market data source temporarily unavailable. Please verify ticker mapping.");
     } finally {
-      setLoading(false);
+      if (retries === 0 || !error) {
+          setLoading(false);
+      }
     }
   };
 
@@ -240,10 +264,14 @@ const Dashboard = () => {
             <div className="bg-red-500/10 p-4 rounded-full mb-6 border border-red-500/20">
                 <AlertCircle className="w-12 h-12 text-red-500 drop-shadow-[0_0_15px_rgba(239,68,68,0.6)]" />
             </div>
-            <h2 className="text-3xl font-black text-white mb-2 tracking-tight">System Interruption</h2>
-            <p className="text-red-400 mb-8 max-w-md text-center text-sm font-medium">{error}</p>
+            <h2 className="text-3xl font-black text-white mb-2 tracking-tight">Data Stream Interrupted</h2>
+            <p className="text-red-400 mb-8 max-w-md text-center text-sm font-medium">
+                We encountered an issue fetching real-time data for <b>{routeSymbol || symbol}</b>.<br/><br/>
+                Backend Message:<br/>
+                <span className="text-white/70 italic text-xs block mt-1">{error}</span>
+            </p>
             <button 
-                onClick={() => fetchData(routeSymbol || symbol || 'TSLA', timeframe)} 
+                onClick={() => { setLoading(true); fetchData(routeSymbol || symbol || 'TSLA', timeframe); }} 
                 className="px-6 py-3 bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 rounded-xl text-white font-bold transition-all duration-300 flex items-center gap-2 hover:shadow-[0_0_20px_rgba(239,68,68,0.2)] hover:-translate-y-0.5"
             >
                 <RefreshCcw size={18} className="text-red-400" /> Reboot Connection Stream

@@ -363,3 +363,1036 @@ INFO:     127.0.0.1:53175 - "GET /stock/indices HTTP/1.1" 200 OK
 INFO:     127.0.0.1:53187 - "GET /stock/indices HTTP/1.1" 200 OK
 INFO:     127.0.0.1:53200 - "GET /stock/indices HTTP/1.1" 200 OK
 INFO:     127.0.0.1:53212 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53254 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53275 - "GET /social/social-feed/HAL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53277 - "GET /social/social-feed/HAL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53277 - "GET /social/social-feed/HAL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53272 - "GET /sentiment/HAL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53272 - "GET /sentiment/HAL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53272 - "GET /sentiment/HAL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53274 - "GET /news/HAL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53274 - "GET /news/HAL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53274 - "GET /news/HAL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53270 - "GET /stock/HAL?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53270 - "GET /stock/HAL?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53270 - "GET /stock/HAL?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53268 - "GET /predict/HAL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53268 - "GET /predict/HAL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53268 - "GET /predict/HAL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53268 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53268 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53294 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53294 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53304 - "GET /social/social-feed/%5ENSEI HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53304 - "GET /social/social-feed/%5ENSEI HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53304 - "GET /social/social-feed/%5ENSEI HTTP/1.1" 200 OK
+$L&TFH.NS: possibly delisted; no price data found  (period=1d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:     127.0.0.1:53301 - "GET /sentiment/%5ENSEI HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53301 - "GET /sentiment/%5ENSEI HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53301 - "GET /sentiment/%5ENSEI HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53303 - "GET /news/%5ENSEI HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53303 - "GET /news/%5ENSEI HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53303 - "GET /news/%5ENSEI HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53299 - "GET /stock/%5ENSEI?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53299 - "GET /stock/%5ENSEI?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53299 - "GET /stock/%5ENSEI?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53294 - "GET /predict/%5ENSEI HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53294 - "GET /predict/%5ENSEI HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53294 - "GET /predict/%5ENSEI HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53294 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53294 - "GET /stock/indices HTTP/1.1" 200 OK
+$TATAMOTORS.NS: possibly delisted; no price data found  (period=1d) (Yahoo error = "No data found, symbol may be delisted")
+$ZOMATO.NS: possibly delisted; no price data found  (period=1d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:     127.0.0.1:53295 - "GET /stock/indian-growth HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53295 - "GET /stock/indian-growth HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53317 - "GET /stock/indian-growth HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53317 - "GET /stock/indian-growth HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53315 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53315 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53323 - "GET /social/social-feed/%5ENSEBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53323 - "GET /social/social-feed/%5ENSEBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53323 - "GET /social/social-feed/%5ENSEBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53322 - "GET /news/%5ENSEBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53322 - "GET /news/%5ENSEBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53322 - "GET /news/%5ENSEBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53321 - "GET /sentiment/%5ENSEBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53321 - "GET /sentiment/%5ENSEBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53321 - "GET /sentiment/%5ENSEBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53315 - "GET /predict/%5ENSEBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53315 - "GET /predict/%5ENSEBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53315 - "GET /predict/%5ENSEBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53317 - "GET /stock/%5ENSEBANK?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53317 - "GET /stock/%5ENSEBANK?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53317 - "GET /stock/%5ENSEBANK?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53317 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53317 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53334 - "GET /social/social-feed/%5ENSEBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53331 - "GET /sentiment/%5ENSEBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53333 - "GET /news/%5ENSEBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53317 - "GET /predict/%5ENSEBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53329 - "GET /stock/%5ENSEBANK?timeframe=5D HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53329 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53329 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53336 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53338 - "GET /stock/indices HTTP/1.1" 200 OK
+Traceback (most recent call last):
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/services/stock_data.py", line 30, in get_real_time_stock
+    data = ticker.history(period="5d")
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/base.py", line 129, in history
+    return self._lazy_load_price_history().history(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/scrapers/history.py", line 224, in history
+    if data['chart']['result'] is None:
+       ~~~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+Failed to fetch index ^NSEI: 'NoneType' object is not subscriptable
+INFO:     127.0.0.1:53342 - "GET /stock/%5ENSEI?timeframe=1m HTTP/1.1" 200 OK
+Failed to fetch index ^BSESN: 'NoneType' object is not subscriptable
+Error fetching news for TCS.NS: Failed to perform, curl: (6) Could not resolve host: finance.yahoo.com. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Error fetching news for RELIANCE.NS: Failed to perform, curl: (6) Could not resolve host: finance.yahoo.com. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Error fetching news for INFY.NS: Failed to perform, curl: (6) Could not resolve host: finance.yahoo.com. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Error fetching news for HDFCBANK.NS: Failed to perform, curl: (6) Could not resolve host: finance.yahoo.com. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Error fetching news for TATAMOTORS: Failed to perform, curl: (6) Could not resolve host: finance.yahoo.com. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Error fetching news for BAJFINANCE.NS: Failed to perform, curl: (6) Could not resolve host: finance.yahoo.com. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Error fetching news for ITC.NS: Failed to perform, curl: (6) Could not resolve host: finance.yahoo.com. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Error fetching news for SBIN.NS: Failed to perform, curl: (6) Could not resolve host: finance.yahoo.com. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+INFO:     127.0.0.1:53358 - "GET /news/general HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53358 - "GET /news/general HTTP/1.1" 200 OK
+Failed to fetch index ^NSEI: 'NoneType' object is not subscriptable
+Failed to fetch index ^BSESN: 'NoneType' object is not subscriptable
+Failed to fetch index ^NSEBANK: 'NoneType' object is not subscriptable
+Failed to fetch index ^NSEBANK: 'NoneType' object is not subscriptable
+Failed to fetch index ^CNXIT: 'NoneType' object is not subscriptable
+Failed to fetch index ^CNXAUTO: 'NoneType' object is not subscriptable
+Failed to fetch index ^CNXFMCG: 'NoneType' object is not subscriptable
+INFO:     127.0.0.1:53360 - "GET /stock/indices HTTP/1.1" 200 OK
+Traceback (most recent call last):
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/services/stock_data.py", line 30, in get_real_time_stock
+    data = ticker.history(period="5d")
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/base.py", line 129, in history
+    return self._lazy_load_price_history().history(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/scrapers/history.py", line 224, in history
+    if data['chart']['result'] is None:
+       ~~~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/services/stock_data.py", line 30, in get_real_time_stock
+    data = ticker.history(period="5d")
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/base.py", line 129, in history
+    return self._lazy_load_price_history().history(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+Traceback (most recent call last):
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/scrapers/history.py", line 224, in history
+    if data['chart']['result'] is None:
+       ~~~~^^^^^^^^^
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/services/stock_data.py", line 30, in get_real_time_stock
+    data = ticker.history(period="5d")
+TypeError: 'NoneType' object is not subscriptable
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+Traceback (most recent call last):
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/base.py", line 129, in history
+    return self._lazy_load_price_history().history(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/services/stock_data.py", line 30, in get_real_time_stock
+    data = ticker.history(period="5d")
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+Failed to get ticker 'TATAMOTORS' reason: Failed to perform, curl: (6) Could not resolve host: query2.finance.yahoo.com. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/base.py", line 129, in history
+    return self._lazy_load_price_history().history(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/scrapers/history.py", line 224, in history
+    if data['chart']['result'] is None:
+       ~~~~^^^^^^^^^
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+TypeError: 'NoneType' object is not subscriptable
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/scrapers/history.py", line 224, in history
+    if data['chart']['result'] is None:
+       ~~~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/services/stock_data.py", line 30, in get_real_time_stock
+    data = ticker.history(period="5d")
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/services/stock_data.py", line 30, in get_real_time_stock
+    data = ticker.history(period="5d")
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/base.py", line 129, in history
+    return self._lazy_load_price_history().history(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/scrapers/history.py", line 224, in history
+    if data['chart']['result'] is None:
+       ~~~~^^^^^^^^^
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/services/stock_data.py", line 30, in get_real_time_stock
+    data = ticker.history(period="5d")
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/base.py", line 129, in history
+    return self._lazy_load_price_history().history(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/scrapers/history.py", line 224, in history
+    if data['chart']['result'] is None:
+       ~~~~^^^^^^^^^
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/base.py", line 129, in history
+    return self._lazy_load_price_history().history(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/scrapers/history.py", line 224, in history
+    if data['chart']['result'] is None:
+       ~~~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+TypeError: 'NoneType' object is not subscriptable
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/services/stock_data.py", line 30, in get_real_time_stock
+    data = ticker.history(period="5d")
+TypeError: 'NoneType' object is not subscriptable
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/base.py", line 129, in history
+    return self._lazy_load_price_history().history(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/scrapers/history.py", line 224, in history
+    if data['chart']['result'] is None:
+       ~~~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+INFO:     127.0.0.1:53362 - "GET /predict/alerts HTTP/1.1" 200 OK
+Traceback (most recent call last):
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/services/stock_data.py", line 30, in get_real_time_stock
+    data = ticker.history(period="5d")
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/base.py", line 129, in history
+    return self._lazy_load_price_history().history(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/scrapers/history.py", line 224, in history
+    if data['chart']['result'] is None:
+       ~~~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/services/stock_data.py", line 30, in get_real_time_stock
+    data = ticker.history(period="5d")
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/base.py", line 129, in history
+    return self._lazy_load_price_history().history(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+Traceback (most recent call last):
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+Traceback (most recent call last):
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/services/stock_data.py", line 30, in get_real_time_stock
+    data = ticker.history(period="5d")
+Failed to get ticker 'TATAMOTORS' reason: Failed to perform, curl: (6) Could not resolve host: query2.finance.yahoo.com. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/services/stock_data.py", line 30, in get_real_time_stock
+    data = ticker.history(period="5d")
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/scrapers/history.py", line 224, in history
+    if data['chart']['result'] is None:
+       ~~~~^^^^^^^^^
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+TypeError: 'NoneType' object is not subscriptable
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/base.py", line 129, in history
+    return self._lazy_load_price_history().history(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/base.py", line 129, in history
+    return self._lazy_load_price_history().history(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/scrapers/history.py", line 224, in history
+    if data['chart']['result'] is None:
+       ~~~~^^^^^^^^^
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+TypeError: 'NoneType' object is not subscriptable
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/scrapers/history.py", line 224, in history
+    if data['chart']['result'] is None:
+       ~~~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/services/stock_data.py", line 30, in get_real_time_stock
+    data = ticker.history(period="5d")
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/services/stock_data.py", line 30, in get_real_time_stock
+    data = ticker.history(period="5d")
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/base.py", line 129, in history
+    return self._lazy_load_price_history().history(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/base.py", line 129, in history
+    return self._lazy_load_price_history().history(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/scrapers/history.py", line 224, in history
+    if data['chart']['result'] is None:
+       ~~~~^^^^^^^^^
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/scrapers/history.py", line 224, in history
+    if data['chart']['result'] is None:
+       ~~~~^^^^^^^^^
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/services/stock_data.py", line 30, in get_real_time_stock
+    data = ticker.history(period="5d")
+TypeError: 'NoneType' object is not subscriptable
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/services/stock_data.py", line 30, in get_real_time_stock
+    data = ticker.history(period="5d")
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/base.py", line 129, in history
+    return self._lazy_load_price_history().history(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/base.py", line 129, in history
+    return self._lazy_load_price_history().history(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/scrapers/history.py", line 224, in history
+    if data['chart']['result'] is None:
+       ~~~~^^^^^^^^^
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/scrapers/history.py", line 224, in history
+    if data['chart']['result'] is None:
+       ~~~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+TypeError: 'NoneType' object is not subscriptable
+INFO:     127.0.0.1:53362 - "GET /predict/alerts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53362 - "GET /news/general HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53362 - "GET /news/general HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53362 - "GET /stock/indices HTTP/1.1" 200 OK
+Failed to fetch index ^CNXIT: 'NoneType' object is not subscriptable
+Skipping RELIANCE.NS: 'NoneType' object is not subscriptable
+Skipping TCS.NS: 'NoneType' object is not subscriptable
+Skipping HDFCBANK.NS: 'NoneType' object is not subscriptable
+Skipping ICICIBANK.NS: 'NoneType' object is not subscriptable
+Skipping BHARTIARTL.NS: 'NoneType' object is not subscriptable
+Skipping INFY.NS: 'NoneType' object is not subscriptable
+Skipping ITC.NS: 'NoneType' object is not subscriptable
+Skipping SBIN.NS: 'NoneType' object is not subscriptable
+Skipping L&TFH.NS: 'NoneType' object is not subscriptable
+Skipping BAJFINANCE.NS: 'NoneType' object is not subscriptable
+Skipping ADANIENT.NS: 'NoneType' object is not subscriptable
+Skipping M&M.NS: 'NoneType' object is not subscriptable
+Skipping TATAMOTORS.NS: 'NoneType' object is not subscriptable
+Skipping SUNPHARMA.NS: 'NoneType' object is not subscriptable
+Skipping NTPC.NS: 'NoneType' object is not subscriptable
+Skipping KOTAKBANK.NS: 'NoneType' object is not subscriptable
+Skipping ZOMATO.NS: 'NoneType' object is not subscriptable
+Skipping TRENT.NS: 'NoneType' object is not subscriptable
+Skipping HAL.NS: 'NoneType' object is not subscriptable
+Skipping JIOFIN.NS: 'NoneType' object is not subscriptable
+INFO:     127.0.0.1:53362 - "GET /stock/indian-growth HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53362 - "GET /stock/indian-growth HTTP/1.1" 200 OK
+Traceback (most recent call last):
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/services/stock_data.py", line 30, in get_real_time_stock
+    data = ticker.history(period="5d")
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+Error fetching news for TSLA: Failed to perform, curl: (6) Could not resolve host: finance.yahoo.com. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+INFO:     127.0.0.1:53370 - "GET /social/social-feed/TSLA HTTP/1.1" 200 OK
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/base.py", line 129, in history
+    return self._lazy_load_price_history().history(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/scrapers/history.py", line 224, in history
+    if data['chart']['result'] is None:
+       ~~~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+INFO:     127.0.0.1:53367 - "GET /sentiment/TSLA HTTP/1.1" 200 OK
+Error fetching news for TSLA: Failed to perform, curl: (6) Could not resolve host: finance.yahoo.com. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+INFO:     127.0.0.1:53369 - "GET /news/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53370 - "GET /social/social-feed/TSLA HTTP/1.1" 200 OK
+Traceback (most recent call last):
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/services/stock_data.py", line 30, in get_real_time_stock
+    data = ticker.history(period="5d")
+Error fetching news for TSLA: Failed to perform, curl: (6) Could not resolve host: finance.yahoo.com. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+INFO:     127.0.0.1:53362 - "GET /predict/TSLA HTTP/1.1" 200 OK
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/base.py", line 129, in history
+    return self._lazy_load_price_history().history(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+Error fetching news for TSLA: Failed to perform, curl: (6) Could not resolve host: finance.yahoo.com. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+INFO:     127.0.0.1:53367 - "GET /sentiment/TSLA HTTP/1.1" 200 OK
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/scrapers/history.py", line 224, in history
+    if data['chart']['result'] is None:
+       ~~~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+Error fetching news for TSLA: Failed to perform, curl: (6) Could not resolve host: finance.yahoo.com. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+INFO:     127.0.0.1:53370 - "GET /social/social-feed/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53369 - "GET /news/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53365 - "GET /stock/TSLA?timeframe=1M HTTP/1.1" 200 OK
+Traceback (most recent call last):
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/services/stock_data.py", line 30, in get_real_time_stock
+    data = ticker.history(period="5d")
+INFO:     127.0.0.1:53370 - "GET /social/social-feed/TSLA HTTP/1.1" 200 OK
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/base.py", line 129, in history
+    return self._lazy_load_price_history().history(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/scrapers/history.py", line 224, in history
+    if data['chart']['result'] is None:
+       ~~~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+Error fetching news for TSLA: Failed to perform, curl: (6) Could not resolve host: finance.yahoo.com. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Error fetching news for TSLA: Failed to perform, curl: (6) Could not resolve host: finance.yahoo.com. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+INFO:     127.0.0.1:53367 - "GET /sentiment/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53369 - "GET /news/TSLA HTTP/1.1" 200 OK
+Error fetching news for TSLA: Failed to perform, curl: (6) Could not resolve host: finance.yahoo.com. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+INFO:     127.0.0.1:53362 - "GET /predict/TSLA HTTP/1.1" 200 OK
+Traceback (most recent call last):
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/services/stock_data.py", line 30, in get_real_time_stock
+    data = ticker.history(period="5d")
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/base.py", line 129, in history
+    return self._lazy_load_price_history().history(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/scrapers/history.py", line 224, in history
+    if data['chart']['result'] is None:
+       ~~~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+INFO:     127.0.0.1:53365 - "GET /stock/TSLA?timeframe=1M HTTP/1.1" 200 OK
+Error fetching news for TSLA: Failed to perform, curl: (6) Could not resolve host: finance.yahoo.com. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+INFO:     127.0.0.1:53369 - "GET /news/TSLA HTTP/1.1" 200 OK
+Traceback (most recent call last):
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/services/stock_data.py", line 30, in get_real_time_stock
+    data = ticker.history(period="5d")
+Error fetching news for TSLA: Failed to perform, curl: (6) Could not resolve host: finance.yahoo.com. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+INFO:     127.0.0.1:53370 - "GET /social/social-feed/TSLA HTTP/1.1" 200 OK
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/base.py", line 129, in history
+    return self._lazy_load_price_history().history(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/scrapers/history.py", line 224, in history
+    if data['chart']['result'] is None:
+       ~~~~^^^^^^^^^
+INFO:     127.0.0.1:53367 - "GET /sentiment/TSLA HTTP/1.1" 200 OK
+TypeError: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/services/stock_data.py", line 30, in get_real_time_stock
+    data = ticker.history(period="5d")
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/base.py", line 129, in history
+    return self._lazy_load_price_history().history(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+Error fetching news for TSLA: Failed to perform, curl: (6) Could not resolve host: finance.yahoo.com. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+INFO:     127.0.0.1:53362 - "GET /predict/TSLA HTTP/1.1" 200 OK
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/scrapers/history.py", line 224, in history
+    if data['chart']['result'] is None:
+       ~~~~^^^^^^^^^
+Error fetching news for TSLA: Failed to perform, curl: (6) Could not resolve host: finance.yahoo.com. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+INFO:     127.0.0.1:53369 - "GET /news/TSLA HTTP/1.1" 200 OK
+TypeError: 'NoneType' object is not subscriptable
+INFO:     127.0.0.1:53365 - "GET /stock/TSLA?timeframe=1M HTTP/1.1" 200 OK
+Error fetching news for TSLA: Failed to perform, curl: (6) Could not resolve host: finance.yahoo.com. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+INFO:     127.0.0.1:53370 - "GET /sentiment/TSLA HTTP/1.1" 200 OK
+Traceback (most recent call last):
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/services/stock_data.py", line 30, in get_real_time_stock
+    data = ticker.history(period="5d")
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/base.py", line 129, in history
+    return self._lazy_load_price_history().history(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/scrapers/history.py", line 224, in history
+    if data['chart']['result'] is None:
+       ~~~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+INFO:     127.0.0.1:53362 - "GET /social/social-feed/TSLA HTTP/1.1" 200 OK
+Traceback (most recent call last):
+Error fetching news for TSLA: Failed to perform, curl: (6) Could not resolve host: finance.yahoo.com. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+INFO:     127.0.0.1:53370 - "GET /sentiment/TSLA HTTP/1.1" 200 OK
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/services/stock_data.py", line 30, in get_real_time_stock
+    data = ticker.history(period="5d")
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/base.py", line 129, in history
+    return self._lazy_load_price_history().history(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+Error fetching news for TSLA: Failed to perform, curl: (6) Could not resolve host: finance.yahoo.com. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+Error fetching news for TSLA: Failed to perform, curl: (6) Could not resolve host: finance.yahoo.com. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+INFO:     127.0.0.1:53367 - "GET /predict/TSLA HTTP/1.1" 200 OK
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/scrapers/history.py", line 224, in history
+    if data['chart']['result'] is None:
+       ~~~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+INFO:     127.0.0.1:53369 - "GET /news/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53365 - "GET /stock/TSLA?timeframe=1M HTTP/1.1" 200 OK
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/services/stock_data.py", line 30, in get_real_time_stock
+    data = ticker.history(period="5d")
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/services/stock_data.py", line 30, in get_real_time_stock
+    data = ticker.history(period="5d")
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/base.py", line 129, in history
+    return self._lazy_load_price_history().history(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/scrapers/history.py", line 224, in history
+    if data['chart']['result'] is None:
+       ~~~~^^^^^^^^^
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/base.py", line 129, in history
+    return self._lazy_load_price_history().history(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/scrapers/history.py", line 224, in history
+    if data['chart']['result'] is None:
+       ~~~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+TypeError: 'NoneType' object is not subscriptable
+INFO:     127.0.0.1:53365 - "GET /stock/TSLA?timeframe=1M HTTP/1.1" 200 OK
+Error fetching news for TSLA: Failed to perform, curl: (6) Could not resolve host: finance.yahoo.com. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+INFO:     127.0.0.1:53367 - "GET /predict/TSLA HTTP/1.1" 200 OK
+Traceback (most recent call last):
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/services/stock_data.py", line 30, in get_real_time_stock
+    data = ticker.history(period="5d")
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/base.py", line 129, in history
+    return self._lazy_load_price_history().history(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/scrapers/history.py", line 224, in history
+    if data['chart']['result'] is None:
+       ~~~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+INFO:     127.0.0.1:53365 - "GET /stock/TSLA?timeframe=1M HTTP/1.1" 200 OK
+Traceback (most recent call last):
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/services/stock_data.py", line 30, in get_real_time_stock
+    data = ticker.history(period="5d")
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/base.py", line 129, in history
+    return self._lazy_load_price_history().history(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/sharathhn/Documents/new_prj/new_prj2/backend/venv/lib/python3.13/site-packages/yfinance/scrapers/history.py", line 224, in history
+    if data['chart']['result'] is None:
+       ~~~~^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+Error fetching news for TSLA: Failed to perform, curl: (6) Could not resolve host: finance.yahoo.com. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+INFO:     127.0.0.1:53367 - "GET /predict/TSLA HTTP/1.1" 200 OK
+Failed to fetch index ^CNXAUTO: 'NoneType' object is not subscriptable
+Failed to fetch index ^CNXFMCG: 'NoneType' object is not subscriptable
+INFO:     127.0.0.1:53340 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53372 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53372 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53435 - "GET /social/social-feed/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53435 - "GET /social/social-feed/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53434 - "GET /news/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53434 - "GET /news/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53432 - "GET /sentiment/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53432 - "GET /sentiment/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53431 - "GET /stock/TSLA?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53431 - "GET /stock/TSLA?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53429 - "GET /predict/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53429 - "GET /predict/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53429 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53429 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53429 - "GET /search?q=tc HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:53431 - "GET /search?q=tcs HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:53429 - "GET /search/?q=tc HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53431 - "GET /search/?q=tcs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53448 - "GET /news/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53449 - "GET /social/social-feed/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53446 - "GET /sentiment/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53449 - "GET /news/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53448 - "GET /social/social-feed/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53446 - "GET /sentiment/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53449 - "GET /sentiment/TCS.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53449 - "GET /social/social-feed/TCS.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53449 - "GET /sentiment/TCS.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53449 - "GET /social/social-feed/TCS.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53431 - "GET /predict/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53431 - "GET /predict/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53451 - "GET /news/TCS.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53429 - "GET /stock/TSLA?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53451 - "GET /news/TCS.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53429 - "GET /stock/TSLA?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53429 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53429 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53446 - "GET /predict/TCS.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53446 - "GET /predict/TCS.NS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53448 - "GET /stock/TCS.NS?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53448 - "GET /stock/TCS.NS?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53461 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53461 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53461 - "GET /news/general HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53461 - "GET /news/general HTTP/1.1" 200 OK
+$L&TFH.NS: possibly delisted; no price data found  (period=1d) (Yahoo error = "No data found, symbol may be delisted")
+$TATAMOTORS.NS: possibly delisted; no price data found  (period=1d) (Yahoo error = "No data found, symbol may be delisted")
+$ZOMATO.NS: possibly delisted; no price data found  (period=1d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:     127.0.0.1:53462 - "GET /stock/indian-growth HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53462 - "GET /stock/indian-growth HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53477 - "GET /news/general HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53497 - "GET /news/general HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53509 - "GET /news/general HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53523 - "GET /news/general HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53546 - "GET /news/general HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53548 - "GET /news/general HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53563 - "GET /social/social-feed/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53563 - "GET /social/social-feed/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53563 - "GET /social/social-feed/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53562 - "GET /news/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53562 - "GET /news/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53560 - "GET /sentiment/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53562 - "GET /news/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53560 - "GET /sentiment/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53560 - "GET /sentiment/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53558 - "GET /stock/TSLA?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53558 - "GET /stock/TSLA?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53558 - "GET /stock/TSLA?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53557 - "GET /predict/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53557 - "GET /predict/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53557 - "GET /predict/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53557 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53557 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53579 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53583 - "GET /stock/%5ENSEI?timeframe=1m HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53581 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53592 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53592 - "GET /news/general HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53592 - "GET /news/general HTTP/1.1" 200 OK
+$TATAMOTORS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$TATAMOTORS.NS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:     127.0.0.1:53592 - "GET /predict/alerts HTTP/1.1" 200 OK
+$TATAMOTORS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$TATAMOTORS.NS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:     127.0.0.1:53592 - "GET /predict/alerts HTTP/1.1" 200 OK
+$L&TFH.NS: possibly delisted; no price data found  (period=1d) (Yahoo error = "No data found, symbol may be delisted")
+$TATAMOTORS.NS: possibly delisted; no price data found  (period=1d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:     127.0.0.1:53592 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53592 - "GET /stock/indices HTTP/1.1" 200 OK
+$ZOMATO.NS: possibly delisted; no price data found  (period=1d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:     127.0.0.1:53607 - "GET /stock/indian-growth HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53607 - "GET /stock/indian-growth HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53617 - "GET /social/social-feed/%5EBSESN HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53617 - "GET /social/social-feed/%5EBSESN HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53617 - "GET /social/social-feed/%5EBSESN HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53616 - "GET /news/%5EBSESN HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53616 - "GET /news/%5EBSESN HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53616 - "GET /news/%5EBSESN HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53615 - "GET /sentiment/%5EBSESN HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53615 - "GET /sentiment/%5EBSESN HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53615 - "GET /sentiment/%5EBSESN HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53607 - "GET /predict/%5EBSESN HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53607 - "GET /predict/%5EBSESN HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53607 - "GET /predict/%5EBSESN HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53592 - "GET /stock/%5EBSESN?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53592 - "GET /stock/%5EBSESN?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53592 - "GET /stock/%5EBSESN?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53592 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53592 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53592 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53607 - "GET /stock/indian-growth HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53592 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53607 - "GET /stock/indian-growth HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53626 - "GET /social/social-feed/KOTAKBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53626 - "GET /social/social-feed/KOTAKBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53626 - "GET /social/social-feed/KOTAKBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53625 - "GET /news/KOTAKBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53625 - "GET /news/KOTAKBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53625 - "GET /news/KOTAKBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53623 - "GET /sentiment/KOTAKBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53623 - "GET /sentiment/KOTAKBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53623 - "GET /sentiment/KOTAKBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53592 - "GET /stock/KOTAKBANK?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53592 - "GET /stock/KOTAKBANK?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53592 - "GET /stock/KOTAKBANK?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53607 - "GET /predict/KOTAKBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53607 - "GET /predict/KOTAKBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53607 - "GET /predict/KOTAKBANK HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53607 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53607 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53623 - "GET /sentiment/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53625 - "GET /news/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53626 - "GET /social/social-feed/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53623 - "GET /sentiment/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53625 - "GET /news/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53626 - "GET /social/social-feed/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53628 - "GET /sentiment/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53625 - "GET /news/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53626 - "GET /social/social-feed/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53592 - "GET /stock/TSLA?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53592 - "GET /stock/TSLA?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53592 - "GET /stock/TSLA?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53607 - "GET /predict/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53607 - "GET /predict/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53607 - "GET /predict/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53607 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53607 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53639 - "GET /news/general HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53639 - "GET /news/general HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53637 - "GET /stock/indices HTTP/1.1" 200 OK
+$TATAMOTORS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:     127.0.0.1:53649 - "GET /news/general HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53649 - "GET /news/general HTTP/1.1" 200 OK
+$TATAMOTORS.NS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:     127.0.0.1:53637 - "GET /predict/alerts HTTP/1.1" 200 OK
+$TATAMOTORS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$TATAMOTORS.NS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:     127.0.0.1:53649 - "GET /predict/alerts HTTP/1.1" 200 OK
+$TATAMOTORS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$TATAMOTORS.NS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:     127.0.0.1:53661 - "GET /predict/alerts HTTP/1.1" 200 OK
+$TATAMOTORS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$TATAMOTORS.NS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:     127.0.0.1:53661 - "GET /predict/alerts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53680 - "GET /sentiment/TCS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53682 - "GET /news/TCS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53683 - "GET /social/social-feed/TCS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53682 - "GET /sentiment/TCS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53680 - "GET /news/TCS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53683 - "GET /social/social-feed/TCS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53682 - "GET /sentiment/TCS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53680 - "GET /news/TCS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53683 - "GET /social/social-feed/TCS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53673 - "GET /predict/TCS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53673 - "GET /predict/TCS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53673 - "GET /predict/TCS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53677 - "GET /stock/TCS?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53677 - "GET /stock/TCS?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53677 - "GET /stock/TCS?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53677 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53677 - "GET /stock/indices HTTP/1.1" 200 OK
+$TATAMOTORS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$TATAMOTORS.NS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:     127.0.0.1:53677 - "GET /predict/alerts HTTP/1.1" 200 OK
+$TATAMOTORS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$TATAMOTORS.NS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:     127.0.0.1:53677 - "GET /predict/alerts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53677 - "GET /predict/SBIN HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53704 - "GET /stock/SBIN?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53713 - "GET /sentiment/SBIN HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53714 - "GET /news/SBIN HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53715 - "GET /social/social-feed/SBIN HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53677 - "GET /predict/SBIN HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53704 - "GET /stock/SBIN?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53713 - "GET /sentiment/SBIN HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53715 - "GET /social/social-feed/SBIN HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53714 - "GET /news/SBIN HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53677 - "GET /predict/SBIN HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53704 - "GET /stock/SBIN?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53713 - "GET /sentiment/SBIN HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53715 - "GET /social/social-feed/SBIN HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53714 - "GET /news/SBIN HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53714 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53714 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53719 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53724 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53724 - "GET /stock/indices HTTP/1.1" 200 OK
+$L&TFH.NS: possibly delisted; no price data found  (period=1d) (Yahoo error = "No data found, symbol may be delisted")
+$TATAMOTORS.NS: possibly delisted; no price data found  (period=1d) (Yahoo error = "No data found, symbol may be delisted")
+$ZOMATO.NS: possibly delisted; no price data found  (period=1d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:     127.0.0.1:53725 - "GET /stock/indian-growth HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53725 - "GET /stock/indian-growth HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53732 - "GET /sentiment/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53734 - "GET /news/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53735 - "GET /social/social-feed/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53734 - "GET /sentiment/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53735 - "GET /social/social-feed/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53732 - "GET /news/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53734 - "GET /sentiment/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53735 - "GET /social/social-feed/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53732 - "GET /news/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53725 - "GET /predict/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53730 - "GET /stock/TSLA?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53725 - "GET /predict/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53730 - "GET /stock/TSLA?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53725 - "GET /predict/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53730 - "GET /stock/TSLA?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53730 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53730 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53730 - "GET /stock/%5ENSEI?timeframe=1m HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53730 - "GET /predict/%5ENSEI HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53730 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53730 - "GET /stock/%5ENSEBANK?timeframe=1m HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53730 - "GET /stock/%5ECNXIT?timeframe=1m HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53745 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53751 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53754 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53756 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53758 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53762 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53768 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53774 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53784 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53787 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53787 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53795 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53805 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53809 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53813 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53815 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53830 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53832 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53832 - "GET /stock/%5ENSEI?timeframe=1m HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53838 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53845 - "GET /stock/%5EBSESN?timeframe=1m HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53845 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53849 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53851 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53853 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53855 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53857 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53869 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53886 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53898 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53914 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53939 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53955 - "GET /stock/indices HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'services/ai_engine.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [7424]
+INFO:     Started server process [7830]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'services/ai_engine.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for connections to close. (CTRL+C to force quit)
+✅ Symbol resolver loaded 2132 NSE symbols
+INFO:     127.0.0.1:53970 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [7830]
+INFO:     Started server process [7851]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: NIFTY_IT"}}}
+$NIFTY_IT: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$NIFTY_IT.NS: possibly delisted; no price data found  (period=5d)
+✅ Symbol resolver loaded 2132 NSE symbols
+INFO:     127.0.0.1:53985 - "GET /predict/NIFTY_IT HTTP/1.1" 200 OK
+HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: BANK_NIFTY"}}}
+$BANK_NIFTY: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$BANK_NIFTY.NS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:     127.0.0.1:53991 - "GET /predict/BANK_NIFTY HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54001 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54016 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54035 - "GET /social/social-feed/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54035 - "GET /social/social-feed/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54032 - "GET /sentiment/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54032 - "GET /sentiment/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54034 - "GET /news/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54034 - "GET /news/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54016 - "GET /predict/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54016 - "GET /predict/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54030 - "GET /stock/TSLA?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54030 - "GET /stock/TSLA?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54030 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54030 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54030 - "GET /stock/%5ENSEI?timeframe=1m HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54030 - "GET /predict/%5ENSEI HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54042 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54042 - "GET /predict/%5ENSEI HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54042 - "GET /stock/%5ECNXIT?timeframe=1m HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54042 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54044 - "GET /stock/%5EBSESN?timeframe=1m HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54044 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54049 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54052 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54058 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54062 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54064 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54066 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54071 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54092 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54094 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54103 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54105 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54107 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54113 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54116 - "GET /stock/indices HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'services/ai_engine.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [7851]
+INFO:     Started server process [7905]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Symbol resolver loaded 2132 NSE symbols
+INFO:     127.0.0.1:54120 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54120 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54132 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54135 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54135 - "GET /stock/%5ENSEI?timeframe=1m HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54154 - "GET /social/social-feed/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54154 - "GET /social/social-feed/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54151 - "GET /sentiment/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54153 - "GET /news/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54153 - "GET /sentiment/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54151 - "GET /news/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54148 - "GET /predict/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54148 - "GET /predict/TSLA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54149 - "GET /stock/TSLA?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54149 - "GET /stock/TSLA?timeframe=1M HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54148 - "GET /stock/%5ENSEI?timeframe=1m HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54149 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54149 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54149 - "GET /predict/%5ENSEI HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54149 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54149 - "GET /stock/%5EBSESN?timeframe=1m HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54149 - "GET /stock/%5ECNXIT?timeframe=1m HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54164 - "GET /stock/%5EBSESN?timeframe=1m HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54162 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54174 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54176 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54178 - "GET /stock/indices HTTP/1.1" 200 OK
+Failed to fetch index ^NSEI: 'NoneType' object is not subscriptable
+Failed to fetch index ^BSESN: 'NoneType' object is not subscriptable
+Failed to fetch index ^NSEBANK: 'NoneType' object is not subscriptable
+Failed to fetch index ^NSEI: 'NoneType' object is not subscriptable
+Failed to fetch index ^CNXIT: 'NoneType' object is not subscriptable
+Failed to fetch index ^NSEI: 'NoneType' object is not subscriptable
+Failed to fetch index ^BSESN: 'NoneType' object is not subscriptable
+Failed to fetch index ^CNXAUTO: 'NoneType' object is not subscriptable
+Failed to fetch index ^BSESN: 'NoneType' object is not subscriptable
+Failed to fetch index ^NSEI: 'NoneType' object is not subscriptable
+Failed to fetch index ^NSEBANK: 'NoneType' object is not subscriptable
+Failed to fetch index ^CNXFMCG: 'NoneType' object is not subscriptable
+INFO:     127.0.0.1:54187 - "GET /stock/indices HTTP/1.1" 200 OK
+Failed to fetch index ^NSEI: 'NoneType' object is not subscriptable
+Failed to fetch index ^BSESN: 'NoneType' object is not subscriptable
+Failed to fetch index ^NSEBANK: 'NoneType' object is not subscriptable
+Failed to fetch index ^CNXIT: 'NoneType' object is not subscriptable
+Failed to fetch index ^BSESN: 'NoneType' object is not subscriptable
+Failed to fetch index ^NSEBANK: 'NoneType' object is not subscriptable
+Failed to fetch index ^CNXIT: 'NoneType' object is not subscriptable
+Failed to fetch index ^CNXAUTO: 'NoneType' object is not subscriptable
+Failed to fetch index ^NSEBANK: 'NoneType' object is not subscriptable
+Failed to fetch index ^CNXIT: 'NoneType' object is not subscriptable
+Failed to fetch index ^CNXAUTO: 'NoneType' object is not subscriptable
+Failed to fetch index ^CNXFMCG: 'NoneType' object is not subscriptable
+INFO:     127.0.0.1:54193 - "GET /stock/indices HTTP/1.1" 200 OK
+Failed to fetch index ^CNXIT: 'NoneType' object is not subscriptable
+Failed to fetch index ^CNXAUTO: 'NoneType' object is not subscriptable
+Failed to fetch index ^CNXFMCG: 'NoneType' object is not subscriptable
+INFO:     127.0.0.1:54198 - "GET /stock/indices HTTP/1.1" 200 OK
+Failed to fetch index ^CNXAUTO: 'NoneType' object is not subscriptable
+Failed to fetch index ^CNXFMCG: 'NoneType' object is not subscriptable
+INFO:     127.0.0.1:54201 - "GET /stock/indices HTTP/1.1" 200 OK
+Failed to fetch index ^CNXFMCG: 'NoneType' object is not subscriptable
+INFO:     127.0.0.1:54208 - "GET /stock/indices HTTP/1.1" 200 OK
+Failed to fetch index ^NSEI: 'NoneType' object is not subscriptable
+INFO:     127.0.0.1:54215 - "GET /stock/indices HTTP/1.1" 200 OK
+Failed to fetch index ^BSESN: 'NoneType' object is not subscriptable
+Failed to fetch index ^NSEBANK: 'NoneType' object is not subscriptable
+Failed to fetch index ^CNXIT: 'NoneType' object is not subscriptable
+Failed to fetch index ^CNXAUTO: 'NoneType' object is not subscriptable
+Failed to fetch index ^CNXFMCG: 'NoneType' object is not subscriptable
+INFO:     127.0.0.1:54229 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54251 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54263 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54281 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54291 - "GET /stock/%5ENSEI?timeframe=1m HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54289 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54299 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54301 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54301 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54303 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54303 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54311 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54321 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54334 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54357 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54374 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54393 - "GET /stock/indices HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'services/ai_engine.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for connections to close. (CTRL+C to force quit)
+INFO:     127.0.0.1:54407 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [7905]
+INFO:     Started server process [7984]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'routers/predict.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for connections to close. (CTRL+C to force quit)
+✅ Symbol resolver loaded 2132 NSE symbols
+INFO:     127.0.0.1:54427 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [7984]
+INFO:     Started server process [8003]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Symbol resolver loaded 2132 NSE symbols
+INFO:     127.0.0.1:54449 - "GET /stock/indices HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [8003]
+INFO:     Stopping reloader process [7422]

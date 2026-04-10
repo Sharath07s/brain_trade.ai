@@ -55,21 +55,22 @@ const BrainTradeEngineModal: React.FC<BrainTradeEngineModalProps> = ({
     };
 
     useEffect(() => {
-        if (isOpen && disclaimerAccepted && !prediction) {
+        if (isOpen && disclaimerAccepted) {
+            setPrediction(null); // Clear old data on symbol change
             fetchPrediction();
         }
         
-        // Auto refresh every 10 seconds if open and market is active
+        // Auto refresh every 15 seconds if open and market is active
         let interval: any;
         if (isOpen && disclaimerAccepted && isMarketOpen) {
              interval = setInterval(() => {
                  fetchPrediction();
-             }, 10000);
+             }, 15000);
         }
         return () => {
             if (interval) clearInterval(interval);
         };
-    }, [isOpen, disclaimerAccepted, symbol, isMarketOpen]); // Removed prediction dependency so it loops
+    }, [isOpen, disclaimerAccepted, symbol, isMarketOpen]);
 
     if (!isOpen) return null;
 
@@ -124,12 +125,18 @@ const BrainTradeEngineModal: React.FC<BrainTradeEngineModalProps> = ({
                             {/* Header */}
                             <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-white/5 relative z-10">
                                 <div className="flex items-center gap-3">
-                                    <div className="p-2 bg-blue-500/20 rounded-lg">
+                                    <div className="p-2 bg-blue-500/20 rounded-lg shadow-[0_0_15px_rgba(59,130,246,0.3)]">
                                         <Brain className="w-6 h-6 text-blue-400" />
                                     </div>
-                                    <div>
-                                        <h2 className="text-xl font-bold text-white tracking-tight">Brain Trade Engine</h2>
-                                        <p className="text-xs text-gray-400 font-medium">Intraday AI Core  |  {stockName}</p>
+                                    <div className="flex flex-col">
+                                        <div className="flex items-center gap-3">
+                                            <h2 className="text-xl font-bold text-white tracking-tight">Brain Trade Engine</h2>
+                                            <div className="flex items-center gap-1.5 bg-green-500/10 border border-green-500/30 px-2.5 py-0.5 rounded-full shadow-[0_0_10px_rgba(0,255,136,0.1)]">
+                                                <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse shadow-[0_0_5px_rgba(0,255,136,0.8)]"></span>
+                                                <span className="text-[10px] font-bold text-green-400 tracking-wider">LIVE AI ACTIVE</span>
+                                            </div>
+                                        </div>
+                                        <p className="text-xs text-gray-400 font-medium mt-0.5">Intraday AI Core  |  {stockName}</p>
                                     </div>
                                 </div>
                                 <button onClick={onClose} className="p-2 text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 rounded-full transition-all">
@@ -180,7 +187,35 @@ const BrainTradeEngineModal: React.FC<BrainTradeEngineModalProps> = ({
                                                         <p className={`text-4xl font-black tracking-tighter ${prediction?.prediction === 'UP' ? 'text-bullish drop-shadow-[0_0_10px_rgba(0,255,136,0.5)]' : prediction?.prediction === 'DOWN' ? 'text-bearish drop-shadow-[0_0_10px_rgba(255,51,102,0.5)]' : 'text-blue-400 drop-shadow-[0_0_10px_rgba(0,200,255,0.5)]'}`}>
                                                             {prediction?.prediction || 'N/A'}
                                                         </p>
-                                                        <p className="text-xs text-white/50 mt-1 font-medium">{prediction?.confidence}% Base Conviction</p>
+                                                        <p className="text-xs text-white/50 mt-1 font-medium">{prediction?.confidence}% Conviction</p>
+                                                    </div>
+                                                </div>
+
+                                                {/* Bullish vs Bearish Confidence Bars */}
+                                                <div className="w-full mt-2 space-y-2">
+                                                    <div className="flex items-center justify-between text-xs">
+                                                        <span className="text-green-400 font-bold">▲ Bullish</span>
+                                                        <span className="text-green-400 font-bold">{prediction?.bull_confidence ?? 50}%</span>
+                                                    </div>
+                                                    <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
+                                                        <motion.div 
+                                                            initial={{ width: 0 }}
+                                                            animate={{ width: `${prediction?.bull_confidence ?? 50}%` }}
+                                                            transition={{ duration: 1, ease: 'easeOut' }}
+                                                            className="h-full bg-gradient-to-r from-green-500 to-green-400 rounded-full shadow-[0_0_8px_rgba(0,255,136,0.4)]"
+                                                        />
+                                                    </div>
+                                                    <div className="flex items-center justify-between text-xs">
+                                                        <span className="text-red-400 font-bold">▼ Bearish</span>
+                                                        <span className="text-red-400 font-bold">{prediction?.bear_confidence ?? 50}%</span>
+                                                    </div>
+                                                    <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
+                                                        <motion.div 
+                                                            initial={{ width: 0 }}
+                                                            animate={{ width: `${prediction?.bear_confidence ?? 50}%` }}
+                                                            transition={{ duration: 1, ease: 'easeOut' }}
+                                                            className="h-full bg-gradient-to-r from-red-500 to-red-400 rounded-full shadow-[0_0_8px_rgba(255,51,102,0.4)]"
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>

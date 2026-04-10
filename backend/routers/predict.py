@@ -5,6 +5,7 @@ from services.macro_news import fetch_macro_news
 from services.social_data import fetch_reddit_sentiment
 from services.smart_sentiment import analyze_macro_factors
 from services.ai_engine import predict_stock_movement
+from services.global_data import fetch_global_macro_data, compute_macro_scores
 import concurrent.futures
 
 router = APIRouter()
@@ -15,8 +16,12 @@ ALERT_WATCHLIST = [
     "BAJFINANCE", "ITC", "SBIN"
 ]
 
+# Module-level global data cache for alerts batch processing
+_cached_global_data = None
+
 def _run_prediction_for_alert(symbol: str) -> dict:
     """Runs the full AI prediction pipeline for a single symbol and formats as alert."""
+    global _cached_global_data
     try:
         price_data = get_real_time_stock(symbol)
         if price_data.get("error"):
@@ -27,12 +32,17 @@ def _run_prediction_for_alert(symbol: str) -> dict:
         social_data = fetch_reddit_sentiment(symbol)
         macro_insights = analyze_macro_factors(macro_news, social_data)
         
+        # Use cached global data for batch alert processing
+        global_raw = _cached_global_data or fetch_global_macro_data()
+        global_macro = compute_macro_scores(symbol, global_raw)
+        
         prediction = predict_stock_movement(
             symbol=symbol,
             price_data=price_data,
             news_data=traditional_news,
             social_data=social_data,
-            macro_insights=macro_insights
+            macro_insights=macro_insights,
+            global_macro=global_macro
         )
         
         # Map prediction to alert type
@@ -125,7 +135,11 @@ def _run_prediction_for_alert(symbol: str) -> dict:
 @router.get("/alerts")
 def get_alerts():
     """Returns AI alerts for the curated watchlist."""
+    global _cached_global_data
     alerts = []
+    
+    # Fetch global data once, share across all alert computations
+    _cached_global_data = fetch_global_macro_data()
     
     # Run predictions concurrently for speed
     with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
@@ -134,6 +148,8 @@ def get_alerts():
             result = future.result()
             if result:
                 alerts.append(result)
+    
+    _cached_global_data = None  # Clear after batch
     
     # Sort by confidence descending
     alerts.sort(key=lambda x: x.get("confidence", 0), reverse=True)
@@ -144,25 +160,40 @@ def get_alerts():
 @router.get("/{symbol:path}")
 def get_prediction(symbol: str):
     symbol = symbol.upper()
+    print(f"\n{'='*60}")
+    print(f"[BrainTrade Engine] Computing prediction for: {symbol}")
+    print(f"{'='*60}")
     
     # 1. Gather all required data
     price_data = get_real_time_stock(symbol)
     
-    # We still fetch the basic news for display / traditional model, but add the macro news
+    # 2. Fetch news and social
     traditional_news = fetch_and_analyze_news(symbol)
     macro_news = fetch_macro_news(symbol)
     social_data = fetch_reddit_sentiment(symbol)
     
-    # 2. Extract LLM Macro Insights
+    # 3. Extract LLM Macro Insights (legacy)
     macro_insights = analyze_macro_factors(macro_news, social_data)
     
-    # 3. Feed into upgrated AI Engine
+    # 4. Fetch LIVE global macro data (NASDAQ, S&P500, USD/INR, Crude, Bonds)
+    global_raw = fetch_global_macro_data()
+    global_macro = compute_macro_scores(symbol, global_raw)
+    
+    print(f"[BrainTrade Engine] Global macro scores: bull={global_macro.get('macro_bull')}, bear={global_macro.get('macro_bear')}")
+    print(f"[BrainTrade Engine] Catalysts: {global_macro.get('catalysts', [])}")
+    
+    # 5. Feed into AI Engine v3
     prediction = predict_stock_movement(
         symbol=symbol, 
         price_data=price_data, 
         news_data=traditional_news, 
         social_data=social_data,
-        macro_insights=macro_insights
+        macro_insights=macro_insights,
+        global_macro=global_macro
     )
+    
+    print(f"[BrainTrade Engine] Result: {prediction.get('prediction')} @ {prediction.get('confidence')}% confidence")
+    print(f"[BrainTrade Engine] Bull: {prediction.get('bull_confidence')}% | Bear: {prediction.get('bear_confidence')}%")
+    print(f"{'='*60}\n")
     
     return prediction
